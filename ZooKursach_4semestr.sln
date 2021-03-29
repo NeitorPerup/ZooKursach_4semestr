@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodBusinessLogic", "UrskiyPeriodBusinessLogic\UrskiyPeriodBusinessLogic.csproj", "{9C665C44-3793-42A3-9C73-C34589EB0C85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodView", "UrskiyPeriodView\UrskiyPeriodView.csproj", "{826B48F9-DF62-4546-AC07-83A3104E9A96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodDatabaseImplement", "UrskiyPeriodDatabaseImplement\UrskiyPeriodDatabaseImplement.csproj", "{24C8D679-A285-4882-8293-6E2429E3D1AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {233360DA-E8AF-401A-9BC6-AAAF740C83DC}
+	EndGlobalSection
+EndGlobal

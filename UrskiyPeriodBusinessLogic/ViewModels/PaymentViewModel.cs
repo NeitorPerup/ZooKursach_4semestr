@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
-namespace UrskiyPeriodDatabaseImplement.Models
+namespace UrskiyPeriodBusinessLogic.ViewModels
 {
-    public class Payment
+    public class PaymentViewModel
     {
         public int Id { get; set; }
 
         public int RouteId { get; set; }
 
-        [Required]
+        [DisplayName("Оплачено")]
         public decimal? Sum { get; set; }
 
-        [Required]
+        [DisplayName("Дата оплаты")]
         public DateTime? PaymentDate { get; set; }
     }
 }

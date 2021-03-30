@@ -67,8 +67,9 @@ namespace UrskiyPeriodView
             this.buttonSignUp.TabIndex = 3;
             this.buttonSignUp.Text = "Зарегистрироваться";
             this.buttonSignUp.UseVisualStyleBackColor = true;
+            this.buttonSignUp.Click += new System.EventHandler(this.buttonSignUp_Click);
             // 
-            // Form1
+            // FormRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,7 +78,7 @@ namespace UrskiyPeriodView
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxEmail);
             this.Controls.Add(this.textBoxLogin);
-            this.Name = "Form1";
+            this.Name = "FormRegister";
             this.Text = "Регистрация";
             this.ResumeLayout(false);
             this.PerformLayout();

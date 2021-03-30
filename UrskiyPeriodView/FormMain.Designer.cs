@@ -31,16 +31,18 @@ namespace UrskiyPeriodView
         {
             this.labelLogo = new System.Windows.Forms.Label();
             this.groupBoxMenu = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonReport = new System.Windows.Forms.Button();
             this.buttonPay = new System.Windows.Forms.Button();
             this.buttonRoute = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSignIn = new System.Windows.Forms.Button();
+            this.buttonSignUp = new System.Windows.Forms.Button();
             this.groupBoxMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelLogo
             // 
-            this.labelLogo.Location = new System.Drawing.Point(176, 121);
+            this.labelLogo.Location = new System.Drawing.Point(206, 175);
             this.labelLogo.Name = "labelLogo";
             this.labelLogo.Size = new System.Drawing.Size(56, 23);
             this.labelLogo.TabIndex = 0;
@@ -49,15 +51,26 @@ namespace UrskiyPeriodView
             // groupBoxMenu
             // 
             this.groupBoxMenu.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxMenu.Controls.Add(this.buttonSignUp);
+            this.groupBoxMenu.Controls.Add(this.buttonSignIn);
             this.groupBoxMenu.Controls.Add(this.button1);
             this.groupBoxMenu.Controls.Add(this.buttonReport);
             this.groupBoxMenu.Controls.Add(this.buttonPay);
             this.groupBoxMenu.Controls.Add(this.buttonRoute);
             this.groupBoxMenu.Location = new System.Drawing.Point(2, 3);
             this.groupBoxMenu.Name = "groupBoxMenu";
-            this.groupBoxMenu.Size = new System.Drawing.Size(578, 30);
+            this.groupBoxMenu.Size = new System.Drawing.Size(652, 30);
             this.groupBoxMenu.TabIndex = 1;
             this.groupBoxMenu.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(207, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Заповедники";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // buttonReport
             // 
@@ -86,20 +99,29 @@ namespace UrskiyPeriodView
             this.buttonRoute.Text = "Маршруты";
             this.buttonRoute.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonSignIn
             // 
-            this.button1.Location = new System.Drawing.Point(207, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Заповедники";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonSignIn.Location = new System.Drawing.Point(487, 1);
+            this.buttonSignIn.Name = "buttonSignIn";
+            this.buttonSignIn.Size = new System.Drawing.Size(55, 23);
+            this.buttonSignIn.TabIndex = 5;
+            this.buttonSignIn.Text = "Вход";
+            this.buttonSignIn.UseVisualStyleBackColor = true;
+            // 
+            // buttonSignUp
+            // 
+            this.buttonSignUp.Location = new System.Drawing.Point(568, 1);
+            this.buttonSignUp.Name = "buttonSignUp";
+            this.buttonSignUp.Size = new System.Drawing.Size(75, 23);
+            this.buttonSignUp.TabIndex = 6;
+            this.buttonSignUp.Text = "Регистрация";
+            this.buttonSignUp.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 258);
+            this.ClientSize = new System.Drawing.Size(657, 364);
             this.Controls.Add(this.groupBoxMenu);
             this.Controls.Add(this.labelLogo);
             this.Name = "FormMain";
@@ -117,5 +139,7 @@ namespace UrskiyPeriodView
         private System.Windows.Forms.Button buttonPay;
         private System.Windows.Forms.Button buttonRoute;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSignUp;
+        private System.Windows.Forms.Button buttonSignIn;
     }
 }

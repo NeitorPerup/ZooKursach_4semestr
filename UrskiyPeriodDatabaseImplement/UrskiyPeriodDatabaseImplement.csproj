@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Implements\" />
+    <ProjectReference Include="..\UrskiyPeriodBusinessLogic\UrskiyPeriodBusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

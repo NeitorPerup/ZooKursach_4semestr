@@ -1,7 +1,7 @@
 ﻿
 namespace UrskiyPeriodView
 {
-    partial class FormRoutesReport
+    partial class FormReserves
     {
         /// <summary>
         /// Required designer variable.
@@ -75,7 +75,7 @@ namespace UrskiyPeriodView
             this.button3.Text = "Word";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // FormRoutes
+            // FormRoutesReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,8 +84,8 @@ namespace UrskiyPeriodView
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Name = "FormRoutes";
-            this.Text = "Список маршрутов";
+            this.Name = "FormRoutesReport";
+            this.Text = "Список Заповедников";
             this.ResumeLayout(false);
 
         }

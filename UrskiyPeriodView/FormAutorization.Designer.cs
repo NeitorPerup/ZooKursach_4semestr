@@ -29,19 +29,19 @@ namespace UrskiyPeriodView
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.buttonSignIn = new System.Windows.Forms.Button();
+            this.labelEmail = new System.Windows.Forms.Label();
+            this.labelPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBoxLogin
+            // textBoxEmail
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(119, 37);
-            this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(100, 20);
-            this.textBoxLogin.TabIndex = 0;
-            this.textBoxLogin.Text = "Логин";
-            this.textBoxLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxEmail.Location = new System.Drawing.Point(119, 37);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(100, 20);
+            this.textBoxEmail.TabIndex = 0;
             // 
             // textBoxPassword
             // 
@@ -49,8 +49,6 @@ namespace UrskiyPeriodView
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
             this.textBoxPassword.TabIndex = 1;
-            this.textBoxPassword.Text = "Пароль";
-            this.textBoxPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buttonSignIn
             // 
@@ -60,15 +58,36 @@ namespace UrskiyPeriodView
             this.buttonSignIn.TabIndex = 2;
             this.buttonSignIn.Text = "Войти";
             this.buttonSignIn.UseVisualStyleBackColor = true;
+            this.buttonSignIn.Click += new System.EventHandler(this.buttonSignIn_Click);
+            // 
+            // labelEmail
+            // 
+            this.labelEmail.AutoSize = true;
+            this.labelEmail.Location = new System.Drawing.Point(44, 37);
+            this.labelEmail.Name = "labelEmail";
+            this.labelEmail.Size = new System.Drawing.Size(32, 13);
+            this.labelEmail.TabIndex = 3;
+            this.labelEmail.Text = "Email";
+            // 
+            // labelPassword
+            // 
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(44, 92);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(45, 13);
+            this.labelPassword.TabIndex = 4;
+            this.labelPassword.Text = "Пароль";
             // 
             // FormAutorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 260);
+            this.ClientSize = new System.Drawing.Size(349, 215);
+            this.Controls.Add(this.labelPassword);
+            this.Controls.Add(this.labelEmail);
             this.Controls.Add(this.buttonSignIn);
             this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.textBoxLogin);
+            this.Controls.Add(this.textBoxEmail);
             this.Name = "FormAutorization";
             this.Text = "Вход в систему";
             this.ResumeLayout(false);
@@ -78,8 +97,10 @@ namespace UrskiyPeriodView
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxLogin;
+        private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Button buttonSignIn;
+        private System.Windows.Forms.Label labelEmail;
+        private System.Windows.Forms.Label labelPassword;
     }
 }

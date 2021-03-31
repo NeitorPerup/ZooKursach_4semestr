@@ -58,13 +58,14 @@ namespace UrskiyPeriodView
                 };
                 _userLogic.CreateOrUpdate(model);
                 Program.User = _userLogic.Read(model)?[0];
+                DialogResult = DialogResult.OK;
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            Close();
         }
     }
 }

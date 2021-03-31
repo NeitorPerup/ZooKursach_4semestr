@@ -5,6 +5,7 @@ using UrskiyPeriodBusinessLogic.ViewModels;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodDatabaseImplement.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace UrskiyPeriodDatabaseImplement.Implements
 {
@@ -18,7 +19,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var route = context.Routes.FirstOrDefault(rec => rec.Id == model.Id);
+                var route = context.Routes.Include(rec => rec. RouteUser).ThenInclude(rec => rec.User).FirstOrDefault(rec => rec.Id == model.Id);
                 return route != null ? CreateModel(route) : null;
             }
         }
@@ -31,7 +32,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Routes.Where(rec => rec.DateVisit == model.DateVisit).Select(CreateModel).ToList();
+                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User).ToList()
+                    .Select(CreateModel).ToList();
             }
         }
 
@@ -39,7 +41,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Routes.Select(CreateModel).ToList();
+                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User).Select(CreateModel).ToList();
             }
         }
 
@@ -47,8 +49,23 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                context.Routes.Add(CreateModel(new Route(), model));
-                context.SaveChanges();
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Route route = CreateModel(new Route(), model);
+                        context.Routes.Add(route);
+                        context.SaveChanges();
+                        CreateModel(route, model, context);
+
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -88,7 +105,10 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 Cost = route.Cost,
                 Count = route.Count,
                 Name = route.Name,
-                DateVisit = route.DateVisit
+                DateVisit = route.DateVisit,
+                RouteUsers = route.RouteUser.ToDictionary(x => x.UserId, x => x.User.Email),
+                //RouteReverces = route.RouteReserve.ToDictionary(x => x.ReserveId, x => x.Reserve.Name)
+                RouteReverces = null
             };
         }
 
@@ -98,6 +118,22 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             route.Count = model.Count;
             route.Name = model.Name;
             route.DateVisit = model.DateVisit;
+            return route;
+        }
+
+        private Route CreateModel(Route route, RouteBindingModel model, UrskiyPeriodDatabase context)
+        {
+            route = CreateModel(route, model);
+            
+            foreach (var routeUser in model.RouteUsers)
+            {
+                context.RouteUsers.Add(new RouteUser
+                {
+                    UserId = routeUser.Key,
+                    RouteId = route.Id
+                });
+            }
+            context.SaveChanges();
             return route;
         }
     }

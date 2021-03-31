@@ -19,7 +19,11 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             using (var context = new UrskiyPeriodDatabase())
             {
                 var user = context.Users.FirstOrDefault(rec => rec.Id == model.Id || rec.Email == model.Email);
-                return user != null ? CreateModel(user) : null;
+                if (user == null || (model.Password != null && user.Password != model.Password)){                    
+                    
+                    return null;
+                }
+                return CreateModel(user);
             }
         }
 

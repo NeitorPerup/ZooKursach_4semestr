@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UrskiyPeriodView
 {
-    public partial class RouteCreate : Form
+    public partial class FormReserves : Form
     {
-        public RouteCreate()
+        public FormReserves()
         {
             InitializeComponent();
         }

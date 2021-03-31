@@ -31,18 +31,18 @@ namespace UrskiyPeriodView
         {
             this.labelLogo = new System.Windows.Forms.Label();
             this.groupBoxMenu = new System.Windows.Forms.GroupBox();
+            this.buttonSignUp = new System.Windows.Forms.Button();
+            this.buttonSignIn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonReport = new System.Windows.Forms.Button();
             this.buttonPay = new System.Windows.Forms.Button();
             this.buttonRoute = new System.Windows.Forms.Button();
-            this.buttonSignIn = new System.Windows.Forms.Button();
-            this.buttonSignUp = new System.Windows.Forms.Button();
             this.groupBoxMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelLogo
             // 
-            this.labelLogo.Location = new System.Drawing.Point(206, 175);
+            this.labelLogo.Location = new System.Drawing.Point(278, 160);
             this.labelLogo.Name = "labelLogo";
             this.labelLogo.Size = new System.Drawing.Size(56, 23);
             this.labelLogo.TabIndex = 0;
@@ -63,18 +63,38 @@ namespace UrskiyPeriodView
             this.groupBoxMenu.TabIndex = 1;
             this.groupBoxMenu.TabStop = false;
             // 
+            // buttonSignUp
+            // 
+            this.buttonSignUp.Location = new System.Drawing.Point(559, 1);
+            this.buttonSignUp.Name = "buttonSignUp";
+            this.buttonSignUp.Size = new System.Drawing.Size(84, 23);
+            this.buttonSignUp.TabIndex = 6;
+            this.buttonSignUp.Text = "Регистрация";
+            this.buttonSignUp.UseVisualStyleBackColor = true;
+            this.buttonSignUp.Click += new System.EventHandler(this.buttonSignUp_Click);
+            // 
+            // buttonSignIn
+            // 
+            this.buttonSignIn.Location = new System.Drawing.Point(487, 1);
+            this.buttonSignIn.Name = "buttonSignIn";
+            this.buttonSignIn.Size = new System.Drawing.Size(55, 23);
+            this.buttonSignIn.TabIndex = 5;
+            this.buttonSignIn.Text = "Вход";
+            this.buttonSignIn.UseVisualStyleBackColor = true;
+            this.buttonSignIn.Click += new System.EventHandler(this.buttonSignIn_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(207, 1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(87, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Заповедники";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // buttonReport
             // 
-            this.buttonReport.Location = new System.Drawing.Point(300, 1);
+            this.buttonReport.Location = new System.Drawing.Point(311, 1);
             this.buttonReport.Name = "buttonReport";
             this.buttonReport.Size = new System.Drawing.Size(75, 23);
             this.buttonReport.TabIndex = 3;
@@ -98,24 +118,7 @@ namespace UrskiyPeriodView
             this.buttonRoute.TabIndex = 0;
             this.buttonRoute.Text = "Маршруты";
             this.buttonRoute.UseVisualStyleBackColor = true;
-            // 
-            // buttonSignIn
-            // 
-            this.buttonSignIn.Location = new System.Drawing.Point(487, 1);
-            this.buttonSignIn.Name = "buttonSignIn";
-            this.buttonSignIn.Size = new System.Drawing.Size(55, 23);
-            this.buttonSignIn.TabIndex = 5;
-            this.buttonSignIn.Text = "Вход";
-            this.buttonSignIn.UseVisualStyleBackColor = true;
-            // 
-            // buttonSignUp
-            // 
-            this.buttonSignUp.Location = new System.Drawing.Point(568, 1);
-            this.buttonSignUp.Name = "buttonSignUp";
-            this.buttonSignUp.Size = new System.Drawing.Size(75, 23);
-            this.buttonSignUp.TabIndex = 6;
-            this.buttonSignUp.Text = "Регистрация";
-            this.buttonSignUp.UseVisualStyleBackColor = true;
+            this.buttonRoute.Click += new System.EventHandler(this.buttonRoute_Click);
             // 
             // FormMain
             // 

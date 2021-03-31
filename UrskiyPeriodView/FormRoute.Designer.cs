@@ -30,100 +30,153 @@ namespace UrskiyPeriodView
         private void InitializeComponent()
         {
             this.labelRouteData = new System.Windows.Forms.Label();
-            this.labelAvaliable = new System.Windows.Forms.Label();
-            this.labelPicked = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.dataGridViewReserves = new System.Windows.Forms.DataGridView();
+            this.dataGridViewPicked = new System.Windows.Forms.DataGridView();
+            this.buttonTake = new System.Windows.Forms.Button();
+            this.buttonReturn = new System.Windows.Forms.Button();
+            this.RId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameRoute = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReserves)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicked)).BeginInit();
             this.SuspendLayout();
             // 
             // labelRouteData
             // 
             this.labelRouteData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelRouteData.Location = new System.Drawing.Point(12, 42);
+            this.labelRouteData.Location = new System.Drawing.Point(168, 9);
             this.labelRouteData.Name = "labelRouteData";
-            this.labelRouteData.Size = new System.Drawing.Size(141, 151);
+            this.labelRouteData.Size = new System.Drawing.Size(341, 75);
             this.labelRouteData.TabIndex = 0;
             this.labelRouteData.Text = "Данные по маршруту";
-            this.labelRouteData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelRouteData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelAvaliable
+            // buttonSave
             // 
-            this.labelAvaliable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelAvaliable.Location = new System.Drawing.Point(334, 42);
-            this.labelAvaliable.Name = "labelAvaliable";
-            this.labelAvaliable.Size = new System.Drawing.Size(100, 151);
-            this.labelAvaliable.TabIndex = 1;
-            this.labelAvaliable.Text = "Доступные для выбора заповедники";
-            this.labelAvaliable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buttonSave.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonSave.Location = new System.Drawing.Point(376, 326);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 5;
+            this.buttonSave.Text = "Сохранить";
+            this.buttonSave.UseVisualStyleBackColor = false;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // labelPicked
+            // buttonCancel
             // 
-            this.labelPicked.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelPicked.Location = new System.Drawing.Point(168, 42);
-            this.labelPicked.Name = "labelPicked";
-            this.labelPicked.Size = new System.Drawing.Size(100, 151);
-            this.labelPicked.TabIndex = 2;
-            this.labelPicked.Text = "Выбранные заповедники";
-            this.labelPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buttonCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonCancel.Location = new System.Drawing.Point(485, 326);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = false;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // label1
+            // dataGridViewReserves
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(284, 83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 23);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "<<";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dataGridViewReserves.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridViewReserves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewReserves.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.RId,
+            this.RName,
+            this.RPrice});
+            this.dataGridViewReserves.Location = new System.Drawing.Point(376, 87);
+            this.dataGridViewReserves.Name = "dataGridViewReserves";
+            this.dataGridViewReserves.Size = new System.Drawing.Size(294, 214);
+            this.dataGridViewReserves.TabIndex = 7;
             // 
-            // label2
+            // dataGridViewPicked
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(284, 126);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 23);
-            this.label2.TabIndex = 4;
-            this.label2.Text = ">>";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dataGridViewPicked.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridViewPicked.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPicked.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.NameRoute,
+            this.Price});
+            this.dataGridViewPicked.Location = new System.Drawing.Point(23, 87);
+            this.dataGridViewPicked.Name = "dataGridViewPicked";
+            this.dataGridViewPicked.Size = new System.Drawing.Size(294, 214);
+            this.dataGridViewPicked.TabIndex = 8;
             // 
-            // button1
+            // buttonTake
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(228, 216);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Сохранить";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonTake.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonTake.Location = new System.Drawing.Point(326, 134);
+            this.buttonTake.Name = "buttonTake";
+            this.buttonTake.Size = new System.Drawing.Size(34, 23);
+            this.buttonTake.TabIndex = 9;
+            this.buttonTake.Text = "<<";
+            this.buttonTake.UseVisualStyleBackColor = false;
+            this.buttonTake.Click += new System.EventHandler(this.buttonTake_Click);
             // 
-            // button2
+            // buttonReturn
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(320, 216);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Отмена";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonReturn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonReturn.Location = new System.Drawing.Point(326, 223);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(34, 23);
+            this.buttonReturn.TabIndex = 10;
+            this.buttonReturn.Text = ">>";
+            this.buttonReturn.UseVisualStyleBackColor = false;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
+            // 
+            // RId
+            // 
+            this.RId.HeaderText = "Id";
+            this.RId.Name = "RId";
+            this.RId.Visible = false;
+            // 
+            // RName
+            // 
+            this.RName.HeaderText = "Название заповедника";
+            this.RName.Name = "RName";
+            this.RName.Width = 150;
+            // 
+            // RPrice
+            // 
+            this.RPrice.HeaderText = "Цена";
+            this.RPrice.Name = "RPrice";
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // NameRoute
+            // 
+            this.NameRoute.HeaderText = "Название заповедника";
+            this.NameRoute.Name = "NameRoute";
+            this.NameRoute.Width = 150;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Цена";
+            this.Price.Name = "Price";
             // 
             // FormRoute
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 262);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelPicked);
-            this.Controls.Add(this.labelAvaliable);
+            this.ClientSize = new System.Drawing.Size(692, 382);
+            this.Controls.Add(this.buttonReturn);
+            this.Controls.Add(this.buttonTake);
+            this.Controls.Add(this.dataGridViewPicked);
+            this.Controls.Add(this.dataGridViewReserves);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelRouteData);
             this.Name = "FormRoute";
             this.Text = "Выбор заповедников";
+            this.Load += new System.EventHandler(this.FormRoute_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReserves)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicked)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -131,11 +184,17 @@ namespace UrskiyPeriodView
         #endregion
 
         private System.Windows.Forms.Label labelRouteData;
-        private System.Windows.Forms.Label labelAvaliable;
-        private System.Windows.Forms.Label labelPicked;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.DataGridView dataGridViewReserves;
+        private System.Windows.Forms.DataGridView dataGridViewPicked;
+        private System.Windows.Forms.Button buttonTake;
+        private System.Windows.Forms.Button buttonReturn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameRoute;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
     }
 }

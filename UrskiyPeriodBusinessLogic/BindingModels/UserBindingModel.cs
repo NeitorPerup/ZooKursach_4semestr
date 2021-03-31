@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace UrskiyPeriodBusinessLogic.BindingModels
 {
+    [DataContract]
     public class UserBindingModel
     {
+        [DataMember]
         public int? Id { get; set; }
 
+        [DataMember]
         public string Email { get; set; }
 
+        [DataMember]
         public string Login { get; set; }
 
+        [DataMember]
         public string Password { get; set; }
 
+        [DataMember]
         public Dictionary<int, int> UserRoutes { get; set; } // RouteId, Count(количество заповедников)
     }
 }

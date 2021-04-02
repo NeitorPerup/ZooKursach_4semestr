@@ -66,6 +66,7 @@ namespace UrskiyPeriodView
             this.buttonUpd.TabIndex = 3;
             this.buttonUpd.Text = "Изменить";
             this.buttonUpd.UseVisualStyleBackColor = true;
+            this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click);
             // 
             // buttonDel
             // 
@@ -75,6 +76,7 @@ namespace UrskiyPeriodView
             this.buttonDel.TabIndex = 4;
             this.buttonDel.Text = "Удалить";
             this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
             // buttonRef
             // 
@@ -104,6 +106,7 @@ namespace UrskiyPeriodView
             this.buttonSave.TabIndex = 7;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // FormRoutes
             // 

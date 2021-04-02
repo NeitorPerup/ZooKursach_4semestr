@@ -20,7 +20,7 @@ namespace UrskiyPeriodDatabaseImplement
 
         public virtual DbSet<Route> Routes { set; get; }
 
-        public virtual DbSet<Payment> Payments { set; get; }
+        public virtual DbSet<Payment> Payment { set; get; }
 
         public virtual DbSet<RouteReserve> RouteReserves { set; get; }
 

@@ -32,7 +32,7 @@ namespace UrskiyPeriodView
             this.labelName = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonReserves = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
@@ -62,15 +62,15 @@ namespace UrskiyPeriodView
             this.textBoxName.Size = new System.Drawing.Size(143, 20);
             this.textBoxName.TabIndex = 3;
             // 
-            // buttonSave
+            // buttonReserves
             // 
-            this.buttonSave.Location = new System.Drawing.Point(77, 143);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 6;
-            this.buttonSave.Text = "Сохранить";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonReserves.Location = new System.Drawing.Point(77, 143);
+            this.buttonReserves.Name = "buttonReserves";
+            this.buttonReserves.Size = new System.Drawing.Size(75, 23);
+            this.buttonReserves.TabIndex = 6;
+            this.buttonReserves.Text = "Заповедники";
+            this.buttonReserves.UseVisualStyleBackColor = true;
+            this.buttonReserves.Click += new System.EventHandler(this.buttonReserves_Click);
             // 
             // buttonCancel
             // 
@@ -96,12 +96,13 @@ namespace UrskiyPeriodView
             this.ClientSize = new System.Drawing.Size(316, 182);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonReserves);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelName);
             this.Name = "FormRouteCreate";
             this.Text = "Создание маршрута";
+            this.Load += new System.EventHandler(this.FormRouteCreate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,7 +113,7 @@ namespace UrskiyPeriodView
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonReserves;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
     }

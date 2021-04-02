@@ -18,7 +18,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var route = context.Payments.FirstOrDefault(rec => rec.Id == model.Id);
+                var route = context.Payment.FirstOrDefault(rec => rec.Id == model.Id);
                 return route != null ? CreateModel(route) : null;
             }
         }
@@ -31,7 +31,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Payments.Where(rec => rec.PaymentDate == model.PaymentDate).Select(CreateModel).ToList();
+                return context.Payment.Where(rec => rec.PaymentDate == model.PaymentDate).Select(CreateModel).ToList();
             }
         }
 
@@ -39,7 +39,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Payments.Select(CreateModel).ToList();
+                return context.Payment.Select(CreateModel).ToList();
             }
         }
 
@@ -47,7 +47,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                context.Payments.Add(CreateModel(new Payment(), model));
+                context.Payment.Add(CreateModel(new Payment(), model));
                 context.SaveChanges();
             }
         }
@@ -56,12 +56,12 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                var user = context.Payments.FirstOrDefault(rec => rec.Id == model.Id);
-                if (user == null)
+                var payment = context.Payment.FirstOrDefault(rec => rec.Id == model.Id);
+                if (payment == null)
                 {
                     throw new Exception("Не найдено");
                 }
-                CreateModel(user, model);
+                CreateModel(payment, model);
                 context.SaveChanges();
             }
         }
@@ -70,12 +70,12 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                var user = context.Payments.FirstOrDefault(rec => rec.Id == model.Id);
+                var user = context.Payment.FirstOrDefault(rec => rec.Id == model.Id);
                 if (user == null)
                 {
                     throw new Exception("Не найдено");
                 }
-                context.Payments.Remove(user);
+                context.Payment.Remove(user);
                 context.SaveChanges();
             }
         }
@@ -93,8 +93,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
 
         private Payment CreateModel(Payment payment, PaymentBindingModel model)
         {
-            payment.Sum = model.Sum;
-            payment.PaymentDate = model.PaymentDate;
+            payment.Sum = model.Sum.Value;
+            payment.PaymentDate = model.PaymentDate.Value;
             payment.RouteId = model.RouteId;
             return payment;
         }

@@ -50,5 +50,16 @@ namespace UrskiyPeriodView
             var form = Container.Resolve<FormRoutes>();
             form.ShowDialog();
         }
+
+        private void buttonPay_Click(object sender, EventArgs e)
+        {
+            if (Program.User == null)
+            {
+                MessageBox.Show("Необходимо авторизироваться", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var form = Container.Resolve<FormPay>();
+            form.ShowDialog();
+        }
     }
 }

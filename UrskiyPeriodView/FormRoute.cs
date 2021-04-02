@@ -23,6 +23,10 @@ namespace UrskiyPeriodView
 
         private List<ReserveViewModel> reserves;
 
+        public int RouteId { set { id = value; } }
+
+        private int? id;
+
         public string RouteName { get; set; }
 
         public DateTime Date { get; set; }
@@ -38,19 +42,39 @@ namespace UrskiyPeriodView
 
         private void FormRoute_Load(object sender, EventArgs e)
         {
+            labelRouteData.Text = $"Название маршрута: {RouteName}\nДата посещения: {Date.ToString("d")}";
+            if (id.HasValue)
+            {
+                var route = _routeLogic.Read(new RouteBindingModel { Id = id })?[0];
+                if (route != null)
+                {
+                    foreach (var key in route.RouteReverces.Keys.ToList())
+                    {
+                        var reserve = _reserveLogic.Read(new ReserveBindingModel { Id = key })?[0];
+                        if (reserve == null)
+                            continue;
+                        picked.Add(reserve);
+                        // удаляем заповедник, который уже выбран
+                        ReserveViewModel delete;
+                        if ((delete = reserves.FirstOrDefault(rec => rec.Id == reserve.Id)) != null)
+                        {
+                            reserves.Remove(delete);
+                        }
+                    }
+                }
+            }
             LoadData();
         }
 
         private void LoadData()
         {
-            labelRouteData.Text = $"Название маршрута: {RouteName}\nДата посещения: {Date.ToString("d")}";            
             if (reserves != null)
             {
                 dataGridViewReserves.Rows.Clear();
                 foreach (var reserve in reserves)
                 {
                     dataGridViewReserves.Rows.Add(new object[] { reserve.Id, reserve.Name, reserve.Price });
-                }             
+                }
             }
             if (picked != null)
             {
@@ -102,14 +126,20 @@ namespace UrskiyPeriodView
             {
                 Dictionary<int, string> routeUsers = new Dictionary<int, string>();
                 routeUsers.Add(Program.User.Id, Program.User.Email);
-                _routeLogic.CreateOrUpdate(new RouteBindingModel
+                RouteBindingModel model = new RouteBindingModel
                 {
                     Name = RouteName,
                     Cost = picked.Sum(x => x.Price),
                     DateVisit = Date,
                     Count = picked.Count,
-                    RouteUsers = routeUsers
-                });
+                    RouteUsers = routeUsers,
+                    RouteReverces = picked.ToDictionary(x => x.Id, x => x.Name)
+                };
+                if (id.HasValue)
+                {
+                    model.Id = id;
+                }
+                _routeLogic.CreateOrUpdate(model);
                 DialogResult = DialogResult.OK;
                 Close();
             }

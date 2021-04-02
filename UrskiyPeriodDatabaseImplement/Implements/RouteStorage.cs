@@ -19,7 +19,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var route = context.Routes.Include(rec => rec. RouteUser).ThenInclude(rec => rec.User).FirstOrDefault(rec => rec.Id == model.Id);
+                var route = context.Routes.Include(rec => rec. RouteUser)
+                    .ThenInclude(rec => rec.User).Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve).FirstOrDefault(rec => rec.Id == model.Id);
                 return route != null ? CreateModel(route) : null;
             }
         }
@@ -32,8 +33,10 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User).ToList()
-                    .Select(CreateModel).ToList();
+                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User)
+                    .Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve)
+                    .Where(rec => rec.RouteUser.Select(x => x.UserId).Contains(model.UserId))
+                    .ToList().Select(CreateModel).ToList();
             }
         }
 
@@ -41,7 +44,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User).Select(CreateModel).ToList();
+                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User)
+                    .Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve).Select(CreateModel).ToList();
             }
         }
 
@@ -73,13 +77,25 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                var user = context.Routes.FirstOrDefault(rec => rec.Id == model.Id);
-                if (user == null)
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    throw new Exception("Маршрут не найден");
+                    try
+                    {
+                        var route = context.Routes.FirstOrDefault(rec => rec.Id == model.Id);
+                        if (route == null)
+                        {
+                            throw new Exception("Маршрут не найден");
+                        }
+                        CreateModel(route, model, context);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
-                CreateModel(user, model);
-                context.SaveChanges();
             }
         }
 
@@ -107,8 +123,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 Name = route.Name,
                 DateVisit = route.DateVisit,
                 RouteUsers = route.RouteUser.ToDictionary(x => x.UserId, x => x.User.Email),
-                //RouteReverces = route.RouteReserve.ToDictionary(x => x.ReserveId, x => x.Reserve.Name)
-                RouteReverces = null
+                RouteReverces = route.RouteReserve.ToDictionary(x => x.ReserveId, x => x.Reserve.Name)
             };
         }
 
@@ -117,7 +132,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             route.Cost = model.Cost;
             route.Count = model.Count;
             route.Name = model.Name;
-            route.DateVisit = model.DateVisit;
+            route.DateVisit = model.DateVisit; 
             return route;
         }
 
@@ -125,11 +140,46 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             route = CreateModel(route, model);
             
+            if (model.Id.HasValue)
+            {
+                var routeReserve = context.RouteReserves.Where(rec =>
+                rec.RouteId == model.Id.Value).ToList();
+                // удаляем те, которых нет в модели
+                context.RouteReserves.RemoveRange(routeReserve.Where(rec =>
+                !model.RouteReverces.ContainsKey(rec.ReserveId)).ToList());
+                context.SaveChanges();
+
+                var routeUser = context.RouteUsers.Where(rec =>
+                rec.RouteId == model.Id.Value).ToList();
+                // удаляем те, которых нет в модели
+                context.RouteUsers.RemoveRange(routeUser.Where(rec =>
+                !model.RouteUsers.ContainsKey(rec.UserId)).ToList());
+                context.SaveChanges();
+
+                foreach (var updateReserve in routeReserve)
+                {
+                    model.RouteReverces.Remove(updateReserve.ReserveId);
+                }
+
+                foreach (var updateUser in routeUser)
+                {
+                    model.RouteUsers.Remove(updateUser.UserId);
+                }
+            }
+
             foreach (var routeUser in model.RouteUsers)
             {
                 context.RouteUsers.Add(new RouteUser
                 {
                     UserId = routeUser.Key,
+                    RouteId = route.Id
+                });
+            }
+            foreach (var routeReserve in model.RouteReverces)
+            {
+                context.RouteReserves.Add(new RouteReserve
+                {
+                    ReserveId = routeReserve.Key,
                     RouteId = route.Id
                 });
             }

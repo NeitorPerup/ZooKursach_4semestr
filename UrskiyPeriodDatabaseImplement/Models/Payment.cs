@@ -12,9 +12,9 @@ namespace UrskiyPeriodDatabaseImplement.Models
         public int RouteId { get; set; }
 
         [Required]
-        public decimal? Sum { get; set; }
+        public decimal Sum { get; set; }
 
         [Required]
-        public DateTime? PaymentDate { get; set; }
+        public DateTime PaymentDate { get; set; }
     }
 }

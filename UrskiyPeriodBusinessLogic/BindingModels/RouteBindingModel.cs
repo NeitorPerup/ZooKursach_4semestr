@@ -11,6 +11,9 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
         public int? Id { get; set; }
 
         [DataMember]
+        public int UserId { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]

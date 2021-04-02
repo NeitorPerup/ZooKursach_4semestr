@@ -109,6 +109,7 @@ namespace UrskiyPeriodView
             this.buttonPay.TabIndex = 2;
             this.buttonPay.Text = "Оплата";
             this.buttonPay.UseVisualStyleBackColor = true;
+            this.buttonPay.Click += new System.EventHandler(this.buttonPay_Click);
             // 
             // buttonRoute
             // 

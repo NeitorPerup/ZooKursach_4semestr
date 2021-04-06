@@ -35,7 +35,10 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             {
                 return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User)
                     .Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve)
-                    .Where(rec => rec.RouteUser.Select(x => x.UserId).Contains(model.UserId))
+                    .Where(rec => model.DateFrom.HasValue && model.DateTo.HasValue && model.DateFrom.Value.Date <= rec.DateVisit.Date
+                     && rec.DateVisit.Date <= model.DateTo.Value.Date &&
+                     rec.RouteUser.Select(x => x.UserId).Contains(model.UserId.Value)
+                     || (model.UserId.HasValue && !model.DateFrom.HasValue && rec.RouteUser.Select(x => x.UserId).Contains(model.UserId.Value)))
                     .ToList().Select(CreateModel).ToList();
             }
         }

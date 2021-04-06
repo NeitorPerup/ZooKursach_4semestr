@@ -156,7 +156,7 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
 
             modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.Payment", b =>
                 {
-                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", null)
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", "Route")
                         .WithMany("Payment")
                         .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.Cascade)

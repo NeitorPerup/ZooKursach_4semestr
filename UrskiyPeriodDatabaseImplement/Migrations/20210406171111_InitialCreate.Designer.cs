@@ -10,7 +10,7 @@ using UrskiyPeriodDatabaseImplement;
 namespace UrskiyPeriodDatabaseImplement.Migrations
 {
     [DbContext(typeof(UrskiyPeriodDatabase))]
-    [Migration("20210329174952_InitialCreate")]
+    [Migration("20210406171111_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,17 +28,14 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("FullSum")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("PaidSum")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("RouteId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Sum")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -161,7 +158,7 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
 
             modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.Payment", b =>
                 {
-                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", null)
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", "Route")
                         .WithMany("Payment")
                         .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.Cascade)

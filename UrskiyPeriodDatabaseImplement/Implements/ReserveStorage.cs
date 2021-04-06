@@ -31,7 +31,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Reserves.Where(rec => rec.Price == model.Price).Select(CreateModel).ToList();
+                return context.Reserves.Where(rec => rec.RouteReserve.Select(x => x.RouteId).Contains(model.RouteId)).Select(CreateModel).ToList();
             }
         }
 

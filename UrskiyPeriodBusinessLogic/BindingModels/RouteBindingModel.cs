@@ -11,7 +11,7 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
         public int? Id { get; set; }
 
         [DataMember]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [DataMember]
         public string Name { get; set; }
@@ -24,6 +24,12 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
 
         [DataMember]
         public DateTime DateVisit { get; set; }
+
+        [DataMember]
+        public DateTime? DateFrom { get; set; }
+
+        [DataMember]
+        public DateTime? DateTo { get; set; }
 
         [DataMember]
         public Dictionary<int, string> RouteReverces { get; set; } // ReverseId, ReverseName

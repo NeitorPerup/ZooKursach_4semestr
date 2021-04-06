@@ -11,6 +11,8 @@ namespace UrskiyPeriodDatabaseImplement.Models
 
         public int RouteId { get; set; }
 
+        public virtual Route Route { get; set; }
+
         [Required]
         public decimal Sum { get; set; }
 

@@ -29,72 +29,76 @@ namespace UrskiyPeriodView
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonSaveToExcel = new System.Windows.Forms.Button();
+            this.buttonSaveToWord = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // buttonCancel
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(24, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(280, 151);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Выбранные маршруты";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buttonCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonCancel.Location = new System.Drawing.Point(245, 226);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = false;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // button1
+            // buttonSaveToExcel
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(214, 188);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Отмена";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonSaveToExcel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonSaveToExcel.Location = new System.Drawing.Point(164, 226);
+            this.buttonSaveToExcel.Name = "buttonSaveToExcel";
+            this.buttonSaveToExcel.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveToExcel.TabIndex = 2;
+            this.buttonSaveToExcel.Text = "Excel";
+            this.buttonSaveToExcel.UseVisualStyleBackColor = false;
+            this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
             // 
-            // button2
+            // buttonSaveToWord
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(133, 188);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Excel";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonSaveToWord.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonSaveToWord.Location = new System.Drawing.Point(83, 226);
+            this.buttonSaveToWord.Name = "buttonSaveToWord";
+            this.buttonSaveToWord.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveToWord.TabIndex = 3;
+            this.buttonSaveToWord.Text = "Word";
+            this.buttonSaveToWord.UseVisualStyleBackColor = false;
+            this.buttonSaveToWord.Click += new System.EventHandler(this.buttonSaveToWord_Click);
             // 
-            // button3
+            // dataGridView
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(52, 188);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Word";
-            this.button3.UseVisualStyleBackColor = false;
+            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(12, 7);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(371, 213);
+            this.dataGridView.TabIndex = 4;
             // 
-            // FormRoutesReport
+            // FormReserves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 223);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
-            this.Name = "FormRoutesReport";
+            this.ClientSize = new System.Drawing.Size(395, 261);
+            this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.buttonSaveToWord);
+            this.Controls.Add(this.buttonSaveToExcel);
+            this.Controls.Add(this.buttonCancel);
+            this.Name = "FormReserves";
             this.Text = "Список Заповедников";
+            this.Load += new System.EventHandler(this.FormReserves_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonSaveToExcel;
+        private System.Windows.Forms.Button buttonSaveToWord;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }

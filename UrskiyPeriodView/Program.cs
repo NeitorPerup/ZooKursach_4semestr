@@ -44,6 +44,7 @@ namespace UrskiyPeriodView
             currentContainer.RegisterType<ReserveLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<RouteLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<UserLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

@@ -4,33 +4,80 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using Microsoft.Reporting.WinForms;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UrskiyPeriodBusinessLogic.BusinessLogics;
+using UrskiyPeriodBusinessLogic.BindingModels;
 
 namespace UrskiyPeriodView
 {
     public partial class FormReport : Form
     {
-        public FormReport()
+        private readonly ReportLogic logicReport;
+
+        public FormReport(ReportLogic reportLogic)
         {
+            logicReport = reportLogic;
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void FormReport_Load(object sender, EventArgs e)
         {
-            dataGridView.Rows.Clear();
+            
+        }
 
-            string[] s = new string[] { "Заповедник_1", "Заповедник_2", "Заповедник_3" };
+        private void LoadData()
+        {
+            try
+            {
+                var routes = logicReport.GetRoutes(new ReportBindingModel
+                {
+                    UserId = Program.User.Id,
+                    DateFrom = dateTimePickerFrom.Value,
+                    DateTo = dateTimePickerTo.Value
+                });
 
-            dataGridView.Rows.Add(new object[] { "Маршрут_1", 3, s[0], 180, 1500 });
+                if (routes != null)
+                {
+                    dataGridView.Rows.Clear();
+                    int i = 0;
+                    foreach (var route in routes)
+                    {
+                        var reserves = route.Reserves;
+                        dataGridView.Rows.Add(new object[] { route.Name, route.Count, reserves[0].Name, route.DateVisit.ToString("d"), route.Cost });
+                        
+                        if (dataGridView.Rows[i].Cells[2] is DataGridViewComboBoxCell cb)
+                        {
+                            cb.DataSource = reserves;
+                            cb.ValueMember = "Name";
+                            cb.DisplayMember = "Name";
+                        }
+                        ++i;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            }
+        }
 
-            (dataGridView.Columns[2] as DataGridViewComboBoxColumn).DataSource = s;
+        private void buttonShow_Click(object sender, EventArgs e)
+        {
+            if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
+            {
+                MessageBox.Show("Дата начала должна быть меньше даты окончания",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            LoadData();
+        }
+
+        private void buttonEmail_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

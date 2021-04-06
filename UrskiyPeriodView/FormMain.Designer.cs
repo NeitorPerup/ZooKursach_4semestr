@@ -33,7 +33,7 @@ namespace UrskiyPeriodView
             this.groupBoxMenu = new System.Windows.Forms.GroupBox();
             this.buttonSignUp = new System.Windows.Forms.Button();
             this.buttonSignIn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonReserves = new System.Windows.Forms.Button();
             this.buttonReport = new System.Windows.Forms.Button();
             this.buttonPay = new System.Windows.Forms.Button();
             this.buttonRoute = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@ namespace UrskiyPeriodView
             this.groupBoxMenu.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBoxMenu.Controls.Add(this.buttonSignUp);
             this.groupBoxMenu.Controls.Add(this.buttonSignIn);
-            this.groupBoxMenu.Controls.Add(this.button1);
+            this.groupBoxMenu.Controls.Add(this.buttonReserves);
             this.groupBoxMenu.Controls.Add(this.buttonReport);
             this.groupBoxMenu.Controls.Add(this.buttonPay);
             this.groupBoxMenu.Controls.Add(this.buttonRoute);
@@ -83,14 +83,15 @@ namespace UrskiyPeriodView
             this.buttonSignIn.UseVisualStyleBackColor = true;
             this.buttonSignIn.Click += new System.EventHandler(this.buttonSignIn_Click);
             // 
-            // button1
+            // buttonReserves
             // 
-            this.button1.Location = new System.Drawing.Point(207, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Заповедники";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonReserves.Location = new System.Drawing.Point(207, 1);
+            this.buttonReserves.Name = "buttonReserves";
+            this.buttonReserves.Size = new System.Drawing.Size(87, 23);
+            this.buttonReserves.TabIndex = 4;
+            this.buttonReserves.Text = "Заповедники";
+            this.buttonReserves.UseVisualStyleBackColor = true;
+            this.buttonReserves.Click += new System.EventHandler(this.buttonReserves_Click);
             // 
             // buttonReport
             // 
@@ -100,6 +101,7 @@ namespace UrskiyPeriodView
             this.buttonReport.TabIndex = 3;
             this.buttonReport.Text = "Отчёт";
             this.buttonReport.UseVisualStyleBackColor = true;
+            this.buttonReport.Click += new System.EventHandler(this.buttonReport_Click);
             // 
             // buttonPay
             // 
@@ -142,7 +144,7 @@ namespace UrskiyPeriodView
         private System.Windows.Forms.Button buttonReport;
         private System.Windows.Forms.Button buttonPay;
         private System.Windows.Forms.Button buttonRoute;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonReserves;
         private System.Windows.Forms.Button buttonSignUp;
         private System.Windows.Forms.Button buttonSignIn;
     }

@@ -59,8 +59,7 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RouteId = table.Column<int>(nullable: false),
-                    FullSum = table.Column<decimal>(nullable: false),
-                    PaidSum = table.Column<decimal>(nullable: false),
+                    Sum = table.Column<decimal>(nullable: false),
                     PaymentDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

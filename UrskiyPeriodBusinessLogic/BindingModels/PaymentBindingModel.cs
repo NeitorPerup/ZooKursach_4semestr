@@ -8,10 +8,10 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
     {
         public int? Id { get; set; }
 
-        public int RouteId { get; set; }
+        public int ReserveId { get; set; }
+
+        public int UserId { get; set; }
 
         public decimal? Sum { get; set; }
-
-        public DateTime? PaymentDate { get; set; }
     }
 }

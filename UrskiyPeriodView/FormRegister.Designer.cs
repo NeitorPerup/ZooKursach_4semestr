@@ -44,7 +44,6 @@ namespace UrskiyPeriodView
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(100, 20);
             this.textBoxLogin.TabIndex = 0;
-            this.textBoxLogin.Text = "Логин";
             // 
             // textBoxEmail
             // 
@@ -52,7 +51,6 @@ namespace UrskiyPeriodView
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(100, 20);
             this.textBoxEmail.TabIndex = 1;
-            this.textBoxEmail.Text = "Email";
             // 
             // textBoxPassword
             // 
@@ -60,7 +58,6 @@ namespace UrskiyPeriodView
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
             this.textBoxPassword.TabIndex = 2;
-            this.textBoxPassword.Text = "Пароль";
             // 
             // buttonSignUp
             // 

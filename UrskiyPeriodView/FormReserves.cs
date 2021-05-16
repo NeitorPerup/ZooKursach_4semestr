@@ -52,6 +52,12 @@ namespace UrskiyPeriodView
 
         private void buttonSaveToWord_Click(object sender, EventArgs e)
         {
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите хотя бы один маршрут", "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
             {
                 List<RouteViewModel> routes = new List<RouteViewModel>();
@@ -61,12 +67,6 @@ namespace UrskiyPeriodView
                     {
                         Id = Convert.ToInt32((row as DataGridViewRow).Cells[0].Value)
                     })?[0]);
-                }
-                if (routes.Count == 0)
-                {
-                    MessageBox.Show("Выберите хотя бы один маршрут", "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                    return;
                 }
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -91,6 +91,12 @@ namespace UrskiyPeriodView
 
         private void buttonSaveToExcel_Click(object sender, EventArgs e)
         {
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите хотя бы один маршрут", "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
             using (var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" })
             {
                 List<RouteViewModel> routes = new List<RouteViewModel>();
@@ -100,12 +106,6 @@ namespace UrskiyPeriodView
                     {
                         Id = Convert.ToInt32((row as DataGridViewRow).Cells[0].Value)
                     })?[0]);
-                }
-                if (routes.Count == 0)
-                {
-                    MessageBox.Show("Выберите хотя бы один маршрут", "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                    return;
                 }
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {

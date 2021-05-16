@@ -14,12 +14,17 @@ namespace UrskiyPeriodView
     {
         private readonly RouteLogic _routeLogic;
 
+        private readonly ReserveLogic _reserveLogic;
+
         private readonly PaymentLogic _paymentLogic;
 
-        public FormPay(RouteLogic routeLogic, PaymentLogic paymentLogic)
+        List<ReserveViewModel> Reserves = new List<ReserveViewModel>();
+
+        public FormPay(RouteLogic routeLogic, PaymentLogic paymentLogic, ReserveLogic reserveLogic)
         {
             _routeLogic = routeLogic;
             _paymentLogic = paymentLogic;
+            _reserveLogic = reserveLogic;
             InitializeComponent();
         }
 
@@ -56,7 +61,23 @@ namespace UrskiyPeriodView
             var route = _routeLogic.Read(new RouteBindingModel { Id = Convert.ToInt32(comboBoxRoute.SelectedValue) })?[0];
             if (route == null)
                 return;
-            labelSum.Text = route.Cost.ToString();
+            List<ReserveViewModel> reserves = new List<ReserveViewModel>();
+            foreach (var res in route.RouteReverces)
+            {
+                var reserve = _reserveLogic.Read(new ReserveBindingModel { Id = res.Key })?[0];
+                reserves.Add(reserve);
+                if (!Reserves.Select(x => x.Name).Contains(reserve.Name))
+                    Reserves.Add(reserve);
+            }
+
+            comboBoxReserve.DataSource = null;
+            foreach (var res in reserves)
+            {
+                comboBoxReserve.DisplayMember = "Name";
+                comboBoxRoute.ValueMember = "Id";
+                comboBoxReserve.DataSource = reserves;
+                comboBoxReserve.SelectedItem = null;
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -65,6 +86,12 @@ namespace UrskiyPeriodView
             if (string.IsNullOrEmpty(comboBoxRoute.Text))
             {
                 MessageBox.Show("Выберите маршрут", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(comboBoxReserve.Text))
+            {
+                MessageBox.Show("Выберите заповедник", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -86,7 +113,7 @@ namespace UrskiyPeriodView
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (sum > Convert.ToInt32(textBoxSum.Text))
+            if (sum > Convert.ToDecimal(labelSum.Text))
             {
                 MessageBox.Show("Внесённая сумма не должна быть больше суммы к оплате", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -96,9 +123,9 @@ namespace UrskiyPeriodView
             {
                 _paymentLogic.CreateOrUpdate(new PaymentBindingModel
                 {
-                    PaymentDate = DateTime.Now,
                     Sum = sum,
-                    RouteId = Convert.ToInt32(comboBoxRoute.SelectedValue)
+                    ReserveId = Convert.ToInt32(comboBoxRoute.SelectedValue),
+                    UserId = Program.User.Id
                 });
                 DialogResult = DialogResult.OK;
                 Close();
@@ -113,6 +140,15 @@ namespace UrskiyPeriodView
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void comboBoxReserve_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var t = comboBoxReserve.SelectedItem;
+            comboBoxReserve.SelectedItem = null;
+            comboBoxReserve.SelectedItem = t;
+            var res = Reserves.FirstOrDefault(x => x.Name == comboBoxReserve.Text);
+            labelSum.Text = res?.Price.ToString();
         }
     }
 }

@@ -36,6 +36,7 @@ namespace UrskiyPeriodView
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxSum = new System.Windows.Forms.TextBox();
             this.labelSum = new System.Windows.Forms.Label();
+            this.comboBoxReserve = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboBoxRoute
@@ -51,7 +52,7 @@ namespace UrskiyPeriodView
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 110);
+            this.label1.Location = new System.Drawing.Point(12, 182);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 1;
@@ -60,7 +61,7 @@ namespace UrskiyPeriodView
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 67);
+            this.label2.Location = new System.Drawing.Point(12, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 13);
             this.label2.TabIndex = 2;
@@ -68,7 +69,7 @@ namespace UrskiyPeriodView
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(139, 166);
+            this.buttonCancel.Location = new System.Drawing.Point(139, 238);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
@@ -78,7 +79,7 @@ namespace UrskiyPeriodView
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(35, 166);
+            this.buttonSave.Location = new System.Drawing.Point(35, 238);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
@@ -88,7 +89,7 @@ namespace UrskiyPeriodView
             // 
             // textBoxSum
             // 
-            this.textBoxSum.Location = new System.Drawing.Point(123, 64);
+            this.textBoxSum.Location = new System.Drawing.Point(123, 136);
             this.textBoxSum.Name = "textBoxSum";
             this.textBoxSum.Size = new System.Drawing.Size(100, 20);
             this.textBoxSum.TabIndex = 5;
@@ -96,16 +97,26 @@ namespace UrskiyPeriodView
             // labelSum
             // 
             this.labelSum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelSum.Location = new System.Drawing.Point(123, 109);
+            this.labelSum.Location = new System.Drawing.Point(123, 181);
             this.labelSum.Name = "labelSum";
             this.labelSum.Size = new System.Drawing.Size(100, 23);
             this.labelSum.TabIndex = 6;
+            // 
+            // comboBoxReserve
+            // 
+            this.comboBoxReserve.FormattingEnabled = true;
+            this.comboBoxReserve.Location = new System.Drawing.Point(15, 74);
+            this.comboBoxReserve.Name = "comboBoxReserve";
+            this.comboBoxReserve.Size = new System.Drawing.Size(208, 21);
+            this.comboBoxReserve.TabIndex = 7;
+            this.comboBoxReserve.SelectionChangeCommitted += new System.EventHandler(this.comboBoxReserve_SelectionChangeCommitted);
             // 
             // FormPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 216);
+            this.ClientSize = new System.Drawing.Size(265, 344);
+            this.Controls.Add(this.comboBoxReserve);
             this.Controls.Add(this.labelSum);
             this.Controls.Add(this.textBoxSum);
             this.Controls.Add(this.buttonSave);
@@ -130,5 +141,6 @@ namespace UrskiyPeriodView
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxSum;
         private System.Windows.Forms.Label labelSum;
+        private System.Windows.Forms.ComboBox comboBoxReserve;
     }
 }

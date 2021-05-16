@@ -18,7 +18,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var route = context.Reserves.FirstOrDefault(rec => rec.Id == model.Id);
+                var route = context.Reserves.FirstOrDefault(rec => rec.Id == model.Id || rec.Name == model.Name);
                 return route != null ? CreateModel(route) : null;
             }
         }
@@ -47,6 +47,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
+                if (context.Reserves.FirstOrDefault(rec => rec.Name == model.Name) != null)
+                    return;
                 context.Reserves.Add(CreateModel(new Reserve(), model));
                 context.SaveChanges();
             }

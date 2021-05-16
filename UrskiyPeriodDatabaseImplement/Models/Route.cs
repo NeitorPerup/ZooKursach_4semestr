@@ -9,6 +9,8 @@ namespace UrskiyPeriodDatabaseImplement.Models
     {
         public int Id { get; set; }
 
+        public int UserId { get; set; }
+
         [Required]
         public string Name { get; set; }
 
@@ -19,15 +21,14 @@ namespace UrskiyPeriodDatabaseImplement.Models
         public decimal Cost { get; set; }
 
         [Required]
-        public DateTime DateVisit { get; set; }
-
-        [ForeignKey("RouteId")]
-        public List<RouteUser> RouteUser { get; set; }
-
-        [ForeignKey("RouteId")]
-        public List<Payment> Payment { get; set; }
+        public DateTime DateVisit { get; set; }    
 
         [ForeignKey("RouteId")]
         public List<RouteReserve> RouteReserve { get; set; }
+
+        public virtual User User { get; set; }
+
+        [ForeignKey("RouteId")]
+        public List<CostItemRoute> CostItemRoute { get; set; }
     }
 }

@@ -19,6 +19,46 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.CostItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Sum")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CostItem");
+                });
+
+            modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.CostItemRoute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CostItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RouteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CostItemId");
+
+                    b.HasIndex("RouteId");
+
+                    b.ToTable("CostItemRoutes");
+                });
+
             modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.Payment", b =>
                 {
                     b.Property<int>("Id")
@@ -26,18 +66,20 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RouteId")
+                    b.Property<int>("ReserveId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Sum")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("RouteId");
+                    b.HasIndex("ReserveId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Payment");
                 });
@@ -81,7 +123,12 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Routes");
                 });
@@ -108,28 +155,6 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                     b.ToTable("RouteReserves");
                 });
 
-            modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.RouteUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RouteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RouteId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RouteUsers");
-                });
-
             modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -154,11 +179,41 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.CostItemRoute", b =>
+                {
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.CostItem", "CostItem")
+                        .WithMany("CostItemRoute")
+                        .HasForeignKey("CostItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", "Route")
+                        .WithMany("CostItemRoute")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.Payment", b =>
                 {
-                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", "Route")
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Reserve", "Reserve")
                         .WithMany("Payment")
-                        .HasForeignKey("RouteId")
+                        .HasForeignKey("ReserveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.User", "User")
+                        .WithMany("Payment")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.Route", b =>
+                {
+                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.User", "User")
+                        .WithMany("Route")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -174,21 +229,6 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                     b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", "Route")
                         .WithMany("RouteReserve")
                         .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("UrskiyPeriodDatabaseImplement.Models.RouteUser", b =>
-                {
-                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.Route", "Route")
-                        .WithMany("RouteUser")
-                        .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UrskiyPeriodDatabaseImplement.Models.User", "User")
-                        .WithMany("RouteUsers")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

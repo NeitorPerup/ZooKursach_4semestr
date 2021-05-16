@@ -39,12 +39,15 @@ namespace UrskiyPeriodView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IUserStorage, UserStorage>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ICostItemStorage, CostItemStorage>(new
+            HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<PaymentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReserveLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<RouteLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<UserLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<CostItemLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

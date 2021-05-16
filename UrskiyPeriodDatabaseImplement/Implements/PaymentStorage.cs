@@ -31,7 +31,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Payment.Where(rec => rec.PaymentDate == model.PaymentDate).Select(CreateModel).ToList();
+                return context.Payment.Where(rec => rec.Sum == model.Sum).Select(CreateModel).ToList();
             }
         }
 
@@ -86,16 +86,16 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             {
                 Id = payment.Id,
                 Sum = payment.Sum,
-                PaymentDate = payment.PaymentDate,
-                RouteId = payment.RouteId
+                ReserveId = payment.ReserveId,
+                UserId = payment.UserId
             };
         }
 
         private Payment CreateModel(Payment payment, PaymentBindingModel model)
         {
             payment.Sum = model.Sum.Value;
-            payment.PaymentDate = model.PaymentDate.Value;
-            payment.RouteId = model.RouteId;
+            payment.ReserveId = model.ReserveId;
+            payment.UserId = model.UserId;
             return payment;
         }
     }

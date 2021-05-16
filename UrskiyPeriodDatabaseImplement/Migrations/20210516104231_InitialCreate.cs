@@ -8,6 +8,20 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CostItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Sum = table.Column<decimal>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CostItem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reserves",
                 columns: table => new
                 {
@@ -19,22 +33,6 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reserves", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Routes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    Count = table.Column<int>(nullable: false),
-                    Cost = table.Column<decimal>(nullable: false),
-                    DateVisit = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Routes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,15 +56,70 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RouteId = table.Column<int>(nullable: false),
-                    Sum = table.Column<decimal>(nullable: false),
-                    PaymentDate = table.Column<DateTime>(nullable: false)
+                    ReserveId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    Sum = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payment_Routes_RouteId",
+                        name: "FK_Payment_Reserves_ReserveId",
+                        column: x => x.ReserveId,
+                        principalTable: "Reserves",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payment_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Routes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Count = table.Column<int>(nullable: false),
+                    Cost = table.Column<decimal>(nullable: false),
+                    DateVisit = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Routes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Routes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CostItemRoutes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CostItemId = table.Column<int>(nullable: false),
+                    RouteId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CostItemRoutes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CostItemRoutes_CostItem_CostItemId",
+                        column: x => x.CostItemId,
+                        principalTable: "CostItem",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CostItemRoutes_Routes_RouteId",
                         column: x => x.RouteId,
                         principalTable: "Routes",
                         principalColumn: "Id",
@@ -99,36 +152,25 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "RouteUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RouteId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RouteUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RouteUsers_Routes_RouteId",
-                        column: x => x.RouteId,
-                        principalTable: "Routes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RouteUsers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_CostItemRoutes_CostItemId",
+                table: "CostItemRoutes",
+                column: "CostItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_RouteId",
-                table: "Payment",
+                name: "IX_CostItemRoutes_RouteId",
+                table: "CostItemRoutes",
                 column: "RouteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payment_ReserveId",
+                table: "Payment",
+                column: "ReserveId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payment_UserId",
+                table: "Payment",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RouteReserves_ReserveId",
@@ -141,18 +183,16 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                 column: "RouteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RouteUsers_RouteId",
-                table: "RouteUsers",
-                column: "RouteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RouteUsers_UserId",
-                table: "RouteUsers",
+                name: "IX_Routes_UserId",
+                table: "Routes",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CostItemRoutes");
+
             migrationBuilder.DropTable(
                 name: "Payment");
 
@@ -160,7 +200,7 @@ namespace UrskiyPeriodDatabaseImplement.Migrations
                 name: "RouteReserves");
 
             migrationBuilder.DropTable(
-                name: "RouteUsers");
+                name: "CostItem");
 
             migrationBuilder.DropTable(
                 name: "Reserves");

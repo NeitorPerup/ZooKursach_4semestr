@@ -8,7 +8,9 @@ namespace UrskiyPeriodBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
-        public int RouteId { get; set; }
+        public int ReserveId { get; set; }
+
+        public int UserId { get; set; }
 
         [DisplayName("Оплачено")]
         public decimal? Sum { get; set; }

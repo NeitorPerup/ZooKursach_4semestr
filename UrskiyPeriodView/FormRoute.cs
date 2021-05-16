@@ -124,16 +124,14 @@ namespace UrskiyPeriodView
         {
             try
             {
-                Dictionary<int, string> routeUsers = new Dictionary<int, string>();
-                routeUsers.Add(Program.User.Id, Program.User.Email);
                 RouteBindingModel model = new RouteBindingModel
                 {
                     Name = RouteName,
                     Cost = picked.Sum(x => x.Price),
                     DateVisit = Date,
                     Count = picked.Count,
-                    RouteUsers = routeUsers,
-                    RouteReverces = picked.ToDictionary(x => x.Id, x => x.Name)
+                    RouteReverces = picked.ToDictionary(x => x.Id, x => x.Name),
+                    UserId = Program.User.Id
                 };
                 if (id.HasValue)
                 {

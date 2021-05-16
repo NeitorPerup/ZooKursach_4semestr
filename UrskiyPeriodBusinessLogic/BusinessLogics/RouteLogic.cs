@@ -21,7 +21,7 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 return _routeStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id.HasValue || model.Name != null)
             {
                 return new List<RouteViewModel> { _routeStorage.GetElement(model) };
             }
@@ -29,21 +29,21 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
         }
 
         public void CreateOrUpdate(RouteBindingModel model)
-        {
-            var element = _routeStorage.GetElement(new RouteBindingModel
-            {
-                Name = model.Name
-            });
-            if (element != null && element.Id != model.Id)
-            {
-                throw new Exception("Уже есть маршрут с таким названием");
-            }
+        {            
             if (model.Id.HasValue)
             {
                 _routeStorage.Update(model);
             }
             else
             {
+                var element = _routeStorage.GetElement(new RouteBindingModel
+                {
+                    Name = model.Name
+                });
+                if (element != null && element.Id != model.Id)
+                {
+                    throw new Exception("Уже есть маршрут с таким названием");
+                }
                 _routeStorage.Insert(model);
             }
         }
@@ -58,7 +58,10 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 throw new Exception("Маршрут не найден");
             }
-            _routeStorage.Delete(model);
+            else
+            {
+                _routeStorage.Update(model);
+            }
         }
     }
 }

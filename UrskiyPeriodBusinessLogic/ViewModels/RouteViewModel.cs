@@ -12,6 +12,9 @@ namespace UrskiyPeriodBusinessLogic.ViewModels
         public int Id { get; set; }
 
         [DataMember]
+        public int UserId { get; set; }
+
+        [DataMember]
         [DisplayName("Название")]
         public string Name { get; set; }
 
@@ -31,6 +34,6 @@ namespace UrskiyPeriodBusinessLogic.ViewModels
         public Dictionary<int, string> RouteReverces { get; set; } // ReverseId, ReverseName
 
         [DataMember]
-        public Dictionary<int, string> RouteUsers { get; set; } // UserId, Email
+        public Dictionary<int, decimal> CostItemRoute { get; set; } // CostItemId, sum
     }
 }

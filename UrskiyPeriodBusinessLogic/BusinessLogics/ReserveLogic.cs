@@ -21,7 +21,7 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 return _reserveStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id.HasValue || model.Name != null)
             {
                 return new List<ReserveViewModel> { _reserveStorage.GetElement(model) };
             }

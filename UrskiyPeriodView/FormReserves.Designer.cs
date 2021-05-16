@@ -39,7 +39,7 @@ namespace UrskiyPeriodView
             // buttonCancel
             // 
             this.buttonCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCancel.Location = new System.Drawing.Point(245, 226);
+            this.buttonCancel.Location = new System.Drawing.Point(308, 300);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
@@ -50,7 +50,7 @@ namespace UrskiyPeriodView
             // buttonSaveToExcel
             // 
             this.buttonSaveToExcel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonSaveToExcel.Location = new System.Drawing.Point(164, 226);
+            this.buttonSaveToExcel.Location = new System.Drawing.Point(227, 300);
             this.buttonSaveToExcel.Name = "buttonSaveToExcel";
             this.buttonSaveToExcel.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveToExcel.TabIndex = 2;
@@ -61,7 +61,7 @@ namespace UrskiyPeriodView
             // buttonSaveToWord
             // 
             this.buttonSaveToWord.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonSaveToWord.Location = new System.Drawing.Point(83, 226);
+            this.buttonSaveToWord.Location = new System.Drawing.Point(146, 300);
             this.buttonSaveToWord.Name = "buttonSaveToWord";
             this.buttonSaveToWord.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveToWord.TabIndex = 3;
@@ -73,16 +73,16 @@ namespace UrskiyPeriodView
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 7);
+            this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(371, 213);
+            this.dataGridView.Size = new System.Drawing.Size(449, 282);
             this.dataGridView.TabIndex = 4;
             // 
             // FormReserves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 261);
+            this.ClientSize = new System.Drawing.Size(473, 335);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.buttonSaveToWord);
             this.Controls.Add(this.buttonSaveToExcel);

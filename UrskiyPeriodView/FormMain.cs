@@ -21,10 +21,20 @@ namespace UrskiyPeriodView
 
         private readonly UserLogic _userLogic;
 
-        public FormMain(UserLogic userLogic)
+        private ReserveLogic _reserveLogic;
+
+        private RouteLogic _routeLogic;
+
+        private CostItemLogic _costItemLogic;
+
+        public FormMain(UserLogic userLogic, ReserveLogic reserveLogic, RouteLogic routeLogic, CostItemLogic costItemLogic)
         {
             _userLogic = userLogic;
-            Program.User = _userLogic.Read(new UserBindingModel { Email = "user" })?[0];
+            _reserveLogic = reserveLogic;
+            _routeLogic = routeLogic;
+            _costItemLogic = costItemLogic;
+            Program.User = _userLogic.Read(new UserBindingModel { Email = "user" })?[0]; // загружаем пользователя, чтобы каждый раз не проходить авторизацию
+            DatabaseHelper.Load(_reserveLogic, _routeLogic, _userLogic, _costItemLogic); // загружаем заповедники если их нет в бд
             InitializeComponent();
         }
 

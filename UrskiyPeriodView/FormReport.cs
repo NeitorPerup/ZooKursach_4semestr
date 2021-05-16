@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UrskiyPeriodBusinessLogic.BusinessLogics;
 using UrskiyPeriodBusinessLogic.BindingModels;
+using UrskiyPeriodBusinessLogic.ViewModels;
 
 namespace UrskiyPeriodView
 {
@@ -42,10 +43,11 @@ namespace UrskiyPeriodView
                 {
                     dataGridView.Rows.Clear();
                     int i = 0;
+                    List<ReserveViewModel> reserves = null;
                     foreach (var route in routes)
                     {
-                        var reserves = route.Reserves;
-                        dataGridView.Rows.Add(new object[] { route.Name, route.Count, reserves[0].Name, route.DateVisit.ToString("d"), route.Cost });
+                        reserves = route.Reserves;
+                        dataGridView.Rows.Add(new object[] { route.Name, route.Count, reserves[0].Name, route.DateVisit.ToString("d"), route.Cost, reserves[0].Price });
                         
                         if (dataGridView.Rows[i].Cells[2] is DataGridViewComboBoxCell cb)
                         {
@@ -55,6 +57,11 @@ namespace UrskiyPeriodView
                         }
                         ++i;
                     }
+                    //foreach (DataGridViewRow row in dataGridView.Rows)
+                    //{
+                    //    var res = reserves.FirstOrDefault(x => x.Name == row.Cells[2].Value.ToString());
+                    //    row.Cells[5].Value = res?.Price;
+                    //}
                 }
             }
             catch (Exception ex)
@@ -78,6 +85,16 @@ namespace UrskiyPeriodView
         private void buttonEmail_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int gridId = 123;
+        }
+
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //LoadData();
         }
     }
 }

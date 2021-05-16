@@ -36,6 +36,7 @@ namespace UrskiyPeriodView
             this.buttonRef = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,19 +51,19 @@ namespace UrskiyPeriodView
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(553, 69);
+            this.buttonAdd.Location = new System.Drawing.Point(546, 112);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(101, 45);
             this.buttonAdd.TabIndex = 2;
-            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.Text = "Добавить новый";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonUpd
             // 
-            this.buttonUpd.Location = new System.Drawing.Point(553, 120);
+            this.buttonUpd.Location = new System.Drawing.Point(546, 175);
             this.buttonUpd.Name = "buttonUpd";
-            this.buttonUpd.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpd.Size = new System.Drawing.Size(101, 23);
             this.buttonUpd.TabIndex = 3;
             this.buttonUpd.Text = "Изменить";
             this.buttonUpd.UseVisualStyleBackColor = true;
@@ -70,9 +71,9 @@ namespace UrskiyPeriodView
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(553, 184);
+            this.buttonDel.Location = new System.Drawing.Point(546, 214);
             this.buttonDel.Name = "buttonDel";
-            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.Size = new System.Drawing.Size(101, 23);
             this.buttonDel.TabIndex = 4;
             this.buttonDel.Text = "Удалить";
             this.buttonDel.UseVisualStyleBackColor = true;
@@ -80,9 +81,9 @@ namespace UrskiyPeriodView
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(553, 232);
+            this.buttonRef.Location = new System.Drawing.Point(546, 262);
             this.buttonRef.Name = "buttonRef";
-            this.buttonRef.Size = new System.Drawing.Size(75, 23);
+            this.buttonRef.Size = new System.Drawing.Size(101, 23);
             this.buttonRef.TabIndex = 5;
             this.buttonRef.Text = "Обновить";
             this.buttonRef.UseVisualStyleBackColor = true;
@@ -108,11 +109,21 @@ namespace UrskiyPeriodView
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(546, 59);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(101, 36);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Добавить существующий";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // FormRoutes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 413);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonRef);
@@ -137,5 +148,6 @@ namespace UrskiyPeriodView
         private System.Windows.Forms.Button buttonRef;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button button1;
     }
 }

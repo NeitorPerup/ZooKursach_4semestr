@@ -16,8 +16,6 @@ namespace UrskiyPeriodDatabaseImplement
 
         public virtual DbSet<User> Users { set; get; }
 
-        public virtual DbSet<RouteUser> RouteUsers { set; get; }
-
         public virtual DbSet<Route> Routes { set; get; }
 
         public virtual DbSet<Payment> Payment { set; get; }
@@ -25,5 +23,9 @@ namespace UrskiyPeriodDatabaseImplement
         public virtual DbSet<RouteReserve> RouteReserves { set; get; }
 
         public virtual DbSet<Reserve> Reserves { set; get; }
+
+        public virtual DbSet<CostItemRoute> CostItemRoutes { set; get; }
+
+        public virtual DbSet<CostItem> CostItem { set; get; }
     }
 }

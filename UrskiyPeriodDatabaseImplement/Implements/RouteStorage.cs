@@ -19,8 +19,9 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var route = context.Routes.Include(rec => rec. RouteUser)
-                    .ThenInclude(rec => rec.User).Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve).FirstOrDefault(rec => rec.Id == model.Id);
+                var route = context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem).
+                    FirstOrDefault(rec => rec.Id == model.Id || rec.Name == model.Name);
                 return route != null ? CreateModel(route) : null;
             }
         }
@@ -33,12 +34,13 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User)
-                    .Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve)
-                    .Where(rec => model.DateFrom.HasValue && model.DateTo.HasValue && model.DateFrom.Value.Date <= rec.DateVisit.Date
-                     && rec.DateVisit.Date <= model.DateTo.Value.Date &&
-                     rec.RouteUser.Select(x => x.UserId).Contains(model.UserId.Value)
-                     || (model.UserId.HasValue && !model.DateFrom.HasValue && rec.RouteUser.Select(x => x.UserId).Contains(model.UserId.Value)))
+                return context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
+                    // сортируем по дате(для отчёта) и по клиенту
+                    .Where(rec => (model.DateFrom.HasValue && model.DateTo.HasValue && model.DateFrom.Value.Date <= rec.DateVisit.Date
+                     && rec.DateVisit.Date <= model.DateTo.Value.Date && model.UserId == rec.UserId)
+                     // сортируем по клиенту
+                     || (model.UserId.HasValue && !model.DateFrom.HasValue))
                     .ToList().Select(CreateModel).ToList();
             }
         }
@@ -47,8 +49,9 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Routes.Include(rec => rec.RouteUser).ThenInclude(rec => rec.User)
-                    .Include(rec => rec.RouteReserve).ThenInclude(rec => rec.Reserve).Select(CreateModel).ToList();
+                return context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
+                    .Select(CreateModel).ToList();
             }
         }
 
@@ -60,6 +63,9 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 {
                     try
                     {
+                        if (context.Routes.FirstOrDefault(rec => rec.Name == model.Name) != null)
+                            return;
+
                         Route route = CreateModel(new Route(), model);
                         context.Routes.Add(route);
                         context.SaveChanges();
@@ -93,7 +99,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                         context.SaveChanges();
                         transaction.Commit();
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         throw;
@@ -125,8 +131,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 Count = route.Count,
                 Name = route.Name,
                 DateVisit = route.DateVisit,
-                RouteUsers = route.RouteUser.ToDictionary(x => x.UserId, x => x.User.Email),
-                RouteReverces = route.RouteReserve.ToDictionary(x => x.ReserveId, x => x.Reserve.Name)
+                RouteReverces = route.RouteReserve.ToDictionary(x => x.ReserveId, x => x.Reserve.Name),
+                CostItemRoute = route.CostItemRoute.ToDictionary(x => x.CostItemId, x => x.CostItem.Sum)
             };
         }
 
@@ -135,7 +141,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             route.Cost = model.Cost;
             route.Count = model.Count;
             route.Name = model.Name;
-            route.DateVisit = model.DateVisit; 
+            route.DateVisit = model.DateVisit;
+            route.UserId = model.UserId.Value;
             return route;
         }
 
@@ -152,32 +159,12 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 !model.RouteReverces.ContainsKey(rec.ReserveId)).ToList());
                 context.SaveChanges();
 
-                var routeUser = context.RouteUsers.Where(rec =>
-                rec.RouteId == model.Id.Value).ToList();
-                // удаляем те, которых нет в модели
-                context.RouteUsers.RemoveRange(routeUser.Where(rec =>
-                !model.RouteUsers.ContainsKey(rec.UserId)).ToList());
-                context.SaveChanges();
-
-                foreach (var updateReserve in routeReserve)
+                foreach (var Reserve in routeReserve)
                 {
-                    model.RouteReverces.Remove(updateReserve.ReserveId);
-                }
-
-                foreach (var updateUser in routeUser)
-                {
-                    model.RouteUsers.Remove(updateUser.UserId);
+                    model.RouteReverces.Remove(Reserve.ReserveId);
                 }
             }
 
-            foreach (var routeUser in model.RouteUsers)
-            {
-                context.RouteUsers.Add(new RouteUser
-                {
-                    UserId = routeUser.Key,
-                    RouteId = route.Id
-                });
-            }
             foreach (var routeReserve in model.RouteReverces)
             {
                 context.RouteReserves.Add(new RouteReserve

@@ -18,8 +18,5 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
 
         [DataMember]
         public string Password { get; set; }
-
-        [DataMember]
-        public Dictionary<int, int> UserRoutes { get; set; } // RouteId, Count(количество заповедников)
     }
 }

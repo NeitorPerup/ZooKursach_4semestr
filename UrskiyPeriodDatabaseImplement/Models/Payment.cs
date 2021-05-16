@@ -9,14 +9,15 @@ namespace UrskiyPeriodDatabaseImplement.Models
     {
         public int Id { get; set; }
 
-        public int RouteId { get; set; }
+        public int ReserveId { get; set; }
 
-        public virtual Route Route { get; set; }
+        public int UserId { get; set; }
+
+        public virtual Reserve Reserve { get; set; }
+
+        public virtual User User { get; set; }
 
         [Required]
         public decimal Sum { get; set; }
-
-        [Required]
-        public DateTime PaymentDate { get; set; }
     }
 }

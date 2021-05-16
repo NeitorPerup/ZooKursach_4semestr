@@ -91,7 +91,16 @@ namespace UrskiyPeriodView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        _routeLogic.Delete(new RouteBindingModel { Id = id });
+                        var route = _routeLogic.Read(new RouteBindingModel { Id = id })?[0];
+                        _routeLogic.Delete(new RouteBindingModel 
+                        { 
+                            Id = id,
+                            Name = route.Name,
+                            Cost = route.Cost,
+                            Count = route.Count,
+                            DateVisit = route.DateVisit,
+                            RouteReverces = route.RouteReverces
+                        });
                     }
                     catch (Exception ex)
                     {

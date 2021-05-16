@@ -35,6 +35,6 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
         public Dictionary<int, string> RouteReverces { get; set; } // ReverseId, ReverseName
 
         [DataMember]
-        public Dictionary<int, string> RouteUsers { get; set; } // UserId, Email
+        public Dictionary<int, decimal> CostItemRoute { get; set; } // CostItemId, sum
     }
 }

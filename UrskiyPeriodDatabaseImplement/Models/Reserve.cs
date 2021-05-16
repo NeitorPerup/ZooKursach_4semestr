@@ -17,5 +17,8 @@ namespace UrskiyPeriodDatabaseImplement.Models
 
         [ForeignKey("ReserveId")]
         public List<RouteReserve> RouteReserve { get; set; }
+
+        [ForeignKey("ReserveId")]
+        public List<Payment> Payment { get; set; }
     }
 }

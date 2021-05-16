@@ -19,6 +19,9 @@ namespace UrskiyPeriodDatabaseImplement.Models
         public string Password { get; set; }
 
         [ForeignKey("UserId")]
-        public List<RouteUser> RouteUsers { get; set; }
+        public List<Route> Route { get; set; }
+
+        [ForeignKey("UserId")]
+        public List<Payment> Payment { get; set; }
     }
 }

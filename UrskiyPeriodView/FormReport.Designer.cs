@@ -38,12 +38,13 @@ namespace UrskiyPeriodView
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.reserveViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.reserveViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reserveViewModelBindingSource)).BeginInit();
@@ -127,15 +128,14 @@ namespace UrskiyPeriodView
             this.Column2,
             this.ColumnComboBox,
             this.Column4,
-            this.Column5});
-            this.dataGridView.Location = new System.Drawing.Point(31, 44);
+            this.Column5,
+            this.ColumnPay});
+            this.dataGridView.Location = new System.Drawing.Point(12, 44);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(548, 326);
+            this.dataGridView.Size = new System.Drawing.Size(647, 326);
             this.dataGridView.TabIndex = 1;
-            // 
-            // reserveViewModelBindingSource
-            // 
-            this.reserveViewModelBindingSource.DataSource = typeof(UrskiyPeriodBusinessLogic.ViewModels.ReserveViewModel);
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            this.dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellValueChanged);
             // 
             // Column1
             // 
@@ -157,6 +157,10 @@ namespace UrskiyPeriodView
             this.ColumnComboBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ColumnComboBox.ValueMember = "Name";
             // 
+            // reserveViewModelBindingSource
+            // 
+            this.reserveViewModelBindingSource.DataSource = typeof(UrskiyPeriodBusinessLogic.ViewModels.ReserveViewModel);
+            // 
             // Column4
             // 
             this.Column4.HeaderText = "Время";
@@ -167,11 +171,16 @@ namespace UrskiyPeriodView
             this.Column5.HeaderText = "Стоимость";
             this.Column5.Name = "Column5";
             // 
+            // ColumnPay
+            // 
+            this.ColumnPay.HeaderText = "Оплачено";
+            this.ColumnPay.Name = "ColumnPay";
+            // 
             // FormReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 416);
+            this.ClientSize = new System.Drawing.Size(664, 416);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.groupBox1);
             this.Location = new System.Drawing.Point(1, 39);
@@ -196,11 +205,12 @@ namespace UrskiyPeriodView
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.BindingSource reserveViewModelBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewComboBoxColumn ColumnComboBox;
-        private System.Windows.Forms.BindingSource reserveViewModelBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPay;
     }
 }

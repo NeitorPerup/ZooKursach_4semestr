@@ -38,9 +38,9 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                     .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
                     // сортируем по дате(для отчёта) и по клиенту
                     .Where(rec => (model.DateFrom.HasValue && model.DateTo.HasValue && model.DateFrom.Value.Date <= rec.DateVisit.Date
-                     && rec.DateVisit.Date <= model.DateTo.Value.Date && model.UserId == rec.UserId)
+                     && rec.DateVisit.Date <= model.DateTo.Value.Date && model.UserId.HasValue && model.UserId == rec.UserId)
                      // сортируем по клиенту
-                     || (model.UserId.HasValue && !model.DateFrom.HasValue))
+                     || (model.UserId.HasValue && !model.DateFrom.HasValue && model.UserId == rec.UserId))
                     .ToList().Select(CreateModel).ToList();
             }
         }

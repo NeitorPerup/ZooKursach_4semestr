@@ -22,7 +22,7 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 return _userStorage.GetFullList();
             }
-            if (model.Id.HasValue || model.Email != null)
+            if (model.Id.HasValue || model.Email != null || model.Login != null)
             {
                 return new List<UserViewModel> { _userStorage.GetElement(model) };
             }
@@ -33,11 +33,12 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
         {
             var element = _userStorage.GetElement(new UserBindingModel
             {
-                Email = model.Email
+                Email = model.Email,
+                Login = model.Login
             });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("Уже есть учётная запись с данной электронной почтой");
+                throw new Exception("Уже есть учётная запись с данной электронной почтой или логином");
             }
             if (model.Id.HasValue)
             {

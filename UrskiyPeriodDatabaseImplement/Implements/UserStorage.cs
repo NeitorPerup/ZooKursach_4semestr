@@ -9,7 +9,7 @@ using System.Linq;
 namespace UrskiyPeriodDatabaseImplement.Implements
 {
     public class UserStorage : IUserStorage
-    {       
+    {
         public UserViewModel GetElement(UserBindingModel model)
         {
             if (model == null)
@@ -18,7 +18,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var user = context.Users.FirstOrDefault(rec => rec.Id == model.Id || rec.Email == model.Email);
+                var user = context.Users.FirstOrDefault(rec => rec.Id == model.Id || rec.Email == model.Email ||
+                rec.Login == model.Login);
                 if (user == null || (model.Password != null && user.Password != model.Password)){                    
                     
                     return null;

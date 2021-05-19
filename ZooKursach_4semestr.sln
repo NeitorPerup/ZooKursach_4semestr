@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodBusinessLogic", "UrskiyPeriodBusinessLogic\UrskiyPeriodBusinessLogic.csproj", "{9C665C44-3793-42A3-9C73-C34589EB0C85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrskiyPeriodBusinessLogic", "UrskiyPeriodBusinessLogic\UrskiyPeriodBusinessLogic.csproj", "{9C665C44-3793-42A3-9C73-C34589EB0C85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodView", "UrskiyPeriodView\UrskiyPeriodView.csproj", "{826B48F9-DF62-4546-AC07-83A3104E9A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodDatabaseImplement", "UrskiyPeriodDatabaseImplement\UrskiyPeriodDatabaseImplement.csproj", "{24C8D679-A285-4882-8293-6E2429E3D1AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrskiyPeriodDatabaseImplement", "UrskiyPeriodDatabaseImplement\UrskiyPeriodDatabaseImplement.csproj", "{24C8D679-A285-4882-8293-6E2429E3D1AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodRestApi", "UrskiyPeriodRestApi\UrskiyPeriodRestApi.csproj", "{0708F07B-D2EB-4371-9859-C8676C214BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodUserApp", "UrskiyPeriodUserApp\UrskiyPeriodUserApp.csproj", "{D2F9DFA9-DF77-4DEF-8139-44838152471F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0708F07B-D2EB-4371-9859-C8676C214BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0708F07B-D2EB-4371-9859-C8676C214BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0708F07B-D2EB-4371-9859-C8676C214BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0708F07B-D2EB-4371-9859-C8676C214BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F9DFA9-DF77-4DEF-8139-44838152471F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F9DFA9-DF77-4DEF-8139-44838152471F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F9DFA9-DF77-4DEF-8139-44838152471F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F9DFA9-DF77-4DEF-8139-44838152471F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

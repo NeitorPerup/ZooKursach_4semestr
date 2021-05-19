@@ -60,7 +60,7 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             }
             else
             {
-                _routeStorage.Update(model);
+                _routeStorage.Delete(model);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UrskiyPeriodBusinessLogic.ViewModels;
 
 namespace UrskiyPeriodBusinessLogic.BindingModels
@@ -15,5 +16,8 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
         public DateTime? DateTo { get; set; }
 
         public List<RouteViewModel> Routes { get; set; }
+
+        [DisplayName("Маршруты")]
+        public List<int> RouteId { get; set; }
     }
 }

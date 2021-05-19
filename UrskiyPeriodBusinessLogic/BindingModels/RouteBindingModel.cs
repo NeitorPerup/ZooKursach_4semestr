@@ -36,5 +36,8 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
 
         [DataMember]
         public Dictionary<int, decimal> CostItemRoute { get; set; } // CostItemId, sum
+
+        [DataMember]
+        public List<int> ReserveId { get; set; }
     }
 }

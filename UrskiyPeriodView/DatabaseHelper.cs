@@ -90,7 +90,7 @@ namespace UrskiyPeriodView
                         }
                         else
                         {
-                            cost.CostItemRoute = routes.Skip(rnd.Next(0, count / 3)).Take(rnd.Next(1, count / 3))
+                            cost.CostItemRoute = routes.Skip(rnd.Next(0, count / 3)).Take(rnd.Next(1, count / 2))
                                 .ToDictionary(x => x.Id, x => x.Name);
                         }
                         _costItemLogic.CreateOrUpdate(cost);

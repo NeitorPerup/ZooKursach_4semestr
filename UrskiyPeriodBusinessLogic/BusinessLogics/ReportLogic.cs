@@ -52,8 +52,8 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заповедников",
-                Routes = model.Routes
-            });
+                Routes = model.RouteId.Select(x => _routeStorage.GetElement(new RouteBindingModel { Id = x })).ToList()
+            }) ;
         }
         /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
@@ -65,7 +65,7 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заповедников",
-                Routes = model.Routes
+                Routes = model.RouteId.Select(x => _routeStorage.GetElement(new RouteBindingModel { Id = x })).ToList()
             });
         }
     }

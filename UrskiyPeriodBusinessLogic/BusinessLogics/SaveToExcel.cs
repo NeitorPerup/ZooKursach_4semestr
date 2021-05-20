@@ -76,7 +76,7 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
                     });
                     rowIndex++;
 
-                    foreach (var reserve in pc.RouteReverces)
+                    foreach (var reserve in pc.Reserves)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
@@ -84,32 +84,13 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
                             ShareStringPart = shareStringPart,
                             ColumnName = "B",
                             RowIndex = rowIndex,
-                            Text = reserve.Value,
+                            Text = reserve.Name,
                             StyleIndex = 1U
                         });
-
-                        //InsertCellInWorksheet(new ExcelCellParameters
-                        //{
-                        //    Worksheet = worksheetPart.Worksheet,
-                        //    ShareStringPart = shareStringPart,
-                        //    ColumnName = "C",
-                        //    RowIndex = rowIndex,
-                        //    Text = component.Item2.ToString(),
-                        //    StyleIndex = 1U
-                        //});
 
                         rowIndex++;
                     }
 
-                    //InsertCellInWorksheet(new ExcelCellParameters
-                    //{
-                    //    Worksheet = worksheetPart.Worksheet,
-                    //    ShareStringPart = shareStringPart,
-                    //    ColumnName = "C",
-                    //    RowIndex = rowIndex,
-                    //    Text = pc.TotalCount.ToString(),
-                    //    StyleIndex = 0U
-                    //});
                     rowIndex++;
                 }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodBusinessLogic.BusinessLogics;
+using UrskiyPeriodBusinessLogic.HelperModels;
 using UrskiyPeriodBusinessLogic.ViewModels;
 
 namespace UrskiyPeriodRestApi.Controllers
@@ -27,6 +28,22 @@ namespace UrskiyPeriodRestApi.Controllers
 
         [HttpPost]
         public void MakeExcel(ReportBindingModel model) => _report.SaveReservesToExcelFile(model);
+
+        [HttpPost]
+        public void MakePdf(ReportBindingModel model) => _report.SaveRoutesToPdfFile(model);
+
+        [HttpPost]
+        public void SendMail(ReportBindingModel model) 
+        {
+            _report.SaveRoutesToPdfFile(model);
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = model.UserEmail,
+                Subject = "Отчет",
+                Text = "Отчет по маршрутам",
+                ReportFile = model.FileName
+            });
+        } 
 
         [HttpGet]
         public ReportBindingModel GetRoutes(int UserId) 

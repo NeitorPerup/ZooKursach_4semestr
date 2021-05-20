@@ -36,7 +36,14 @@ namespace UrskiyPeriodBusinessLogic.ViewModels
         [DataMember]
         public Dictionary<int, decimal> CostItemRoute { get; set; } // CostItemId, sum
 
+        [DataMember]
         [DisplayName("Заповедники")]
         public List<int> ReserveId { get; set; }
+
+        [DataMember]
+        public List<ReserveViewModel> Reserves { get; set; }
+
+        [DataMember]
+        public List<CostItemViewModel> CostItems { get; set; }
     }
 }

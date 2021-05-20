@@ -46,7 +46,7 @@ namespace UrskiyPeriodView
                     List<ReserveViewModel> reserves = null;
                     foreach (var route in routes)
                     {
-                        reserves = route.Reserves;
+                        reserves = null; // чтоб не ругалось, формы всё равно не нужны =(
                         dataGridView.Rows.Add(new object[] { route.Name, route.Count, reserves[0].Name, route.DateVisit.ToString("d"), route.Cost, reserves[0].Price });
                         
                         if (dataGridView.Rows[i].Cells[2] is DataGridViewComboBoxCell cb)

@@ -150,7 +150,49 @@ namespace UrskiyPeriodUserApp.Controllers
                 Id = Id
             });
             Response.Redirect("../Index");
-            return;
+        }
+
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            var reserves = new MultiSelectList(APIUser.GetRequest<List<ReserveViewModel>>($"api/main/GetReserveList"),
+                "Id", "Name", "Price");
+            var route = APIUser.GetRequest<RouteViewModel>($"api/main/GetRoute?id={Id}");
+            foreach (var elem in reserves)
+            {
+                if (route.ReserveId.Contains(Convert.ToInt32(elem.Value)))
+                {
+                    elem.Selected = true;
+                }
+            }
+            ViewBag.Reserves = reserves;
+            return View(route);
+        }
+
+        [HttpPost]
+        public void Update(DateTime datepicker, [Bind("ReserveId", "Name", "Id")] RouteViewModel model)
+        {
+            if (string.IsNullOrEmpty(model.Name) || datepicker == null)
+            {
+                return;
+            }
+            if (model.ReserveId == null || model.ReserveId.Count == 0)
+            {
+                var elem = APIUser.GetRequest<RouteViewModel>($"api/main/GetRoute?id={model.Id}");
+                model.ReserveId = elem.ReserveId;
+            }
+            List<ReserveViewModel> reserves = model.ReserveId.
+                Select(x => APIUser.GetRequest<ReserveViewModel>($"api/main/GetReserve?id={x}")).ToList();
+            
+            APIUser.PostRequest("api/main/CreateRoute", new RouteBindingModel
+            {
+                Cost = reserves.Sum(x => x.Price),
+                Count = reserves.Count,
+                Name = model.Name,
+                DateVisit = datepicker,
+                RouteReverces = reserves.ToDictionary(x => x.Id, x => x.Name)
+            });
+            Response.Redirect("~/Home/Index");
         }
     }
 }

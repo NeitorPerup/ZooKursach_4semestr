@@ -59,6 +59,9 @@
                         <a asp-action="Update" asp-route-Id="@item.Id">Изменить</a>
                     </td>
                     <td>
+                        <a asp-action="Index" asp-controller="Payment" asp-route-RouteId="@item.Id">Оплатить</a>
+                    </td>
+                    <td>
                         <a asp-action="Delete" asp-route-Id="@item.Id">Удалить</a>
                     </td>
                 </tr>

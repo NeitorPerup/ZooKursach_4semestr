@@ -47,13 +47,13 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
                         }
 
                     }));
-                    foreach (var reserve in route.RouteReverces)
+                    foreach (var reserve in route.Reserves)
                     {
                         docBody.AppendChild(CreateParagraph(new WordParagraph
                         {
                             Texts = new List<(string, WordTextProperties)>
                             {
-                                (reserve.Value, new WordTextProperties {Bold = false, Size = "24", }),
+                                (reserve.Name, new WordTextProperties {Bold = false, Size = "24", }),
                             },
                             TextProperties = new WordTextProperties
                             {

@@ -11,6 +11,10 @@ namespace UrskiyPeriodBusinessLogic.Interfaces
 
         List<RouteViewModel> GetFilteredList(RouteBindingModel model);
 
+        List<RouteViewModel> GetFilteredByDateList(RouteBindingModel model);
+
+        List<RouteViewModel> GetFilteredByPickList(RouteBindingModel model);
+
         RouteViewModel GetElement(RouteBindingModel model);
 
         void Insert(RouteBindingModel model);

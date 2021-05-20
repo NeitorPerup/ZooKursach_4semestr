@@ -5,7 +5,7 @@ using UrskiyPeriodBusinessLogic.BusinessLogics;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodBusinessLogic.ViewModels;
 
-namespace UrskiyPeriodView
+namespace UrskiyPeriodRestApi
 {
     public static class DatabaseHelper
     {
@@ -66,11 +66,11 @@ namespace UrskiyPeriodView
                     new CostItemBindingModel { Name = "Расчёски для пингвинов", Sum = 800},
                     new CostItemBindingModel { Name = "Сахарная вата для гориллы", Sum = 1234},
                     new CostItemBindingModel { Name = "Львиная зубная нить", Sum = 4321},
-                    new CostItemBindingModel { Name = "", Sum = 6666},
-                    new CostItemBindingModel { Name = "", Sum = 5674},
-                    new CostItemBindingModel { Name = "", Sum = 3643},
-                    new CostItemBindingModel { Name = "", Sum = 23467},
-                    new CostItemBindingModel { Name = "", Sum = 99999},
+                    new CostItemBindingModel { Name = "И", Sum = 6666},
+                    new CostItemBindingModel { Name = "Ещё", Sum = 5674},
+                    new CostItemBindingModel { Name = "5", Sum = 3643},
+                    new CostItemBindingModel { Name = "Статей", Sum = 23467},
+                    new CostItemBindingModel { Name = "Затрат", Sum = 99999},
                 };
 
                 try

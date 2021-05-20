@@ -1,0 +1,53 @@
+﻿@model UrskiyPeriodBusinessLogic.BindingModels.PaymentBindingModel
+@{
+    ViewData["Title"] = "Payment";
+}
+<div class="text-center">
+    <h2 class="display-4">Оплата заповедников</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Маршрут:</div>
+        <div class="col-8">
+            <input type="text" name="route" id="route" value="@ViewBag.Route.Name" readonly="true" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Заповедник:</div>
+        <div class="col-8">
+            <select id="ReserveId" name="ReserveId" class="form-control" asp-items="ViewBag.Reserve"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Внесённая сумма:</div>
+        <div class="col-8"><input type="text" name="Sum" id="Sum" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Сумма к оплате:</div>
+        <div class="col-8">
+            <input type="text" id="reserveSum" name="reserveSum" value="@ViewBag.Reserve.Items[0].Price" readonly="true" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8"><input asp-action="Index" type="submit" value="Оплатить" class="btn btnprimary" /></div>
+    </div>
+</form>
+<script>
+    $('#ReserveId').on('click', function () {
+        check();
+    });
+    function check() {
+        var Id = $('#ReserveId').val();
+        if (Id) {
+            $.ajax({
+                method: "POST",
+                url: "/Payment/CalcSum",
+                data: { Id: Id},
+                success: function (result) {
+                    $("#reserveSum").val(result);
+                }
+            });
+        };
+    }
+</script>

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using UrskiyPeriodBusinessLogic.HelperModels;
 using UrskiyPeriodBusinessLogic.Interfaces;
 using UrskiyPeriodBusinessLogic.BusinessLogics;
 using UrskiyPeriodDatabaseImplement.Implements;
@@ -21,6 +21,13 @@ namespace UrskiyPeriodRestApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = configuration["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(configuration["SmtpClientPort"]),
+                MailLogin = configuration["MailLogin"],
+                MailPassword = configuration["MailPassword"],
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -39,6 +46,11 @@ namespace UrskiyPeriodRestApi
             services.AddTransient<RouteLogic>();
             services.AddTransient<PaymentLogic>();
             services.AddTransient<ReportLogic>();
+            services.AddTransient<MailLogic>();
+            services.AddTransient<GraphicLogic>();
+            services.AddScoped<DatabaseHelper>();
+            DatabaseHelper database = services.BuildServiceProvider().GetRequiredService<DatabaseHelper>();
+            database.Load();
             services.AddControllers().AddNewtonsoftJson();
         }
 

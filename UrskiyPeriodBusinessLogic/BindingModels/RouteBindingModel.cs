@@ -39,5 +39,10 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
 
         [DataMember]
         public List<int> ReserveId { get; set; }
+
+        [DataMember]
+        public List<int> PickedRoutes { get; set; }
+
+        public bool? NoCost { get; set; }
     }
 }

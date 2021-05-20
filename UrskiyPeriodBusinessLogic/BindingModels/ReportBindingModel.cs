@@ -11,6 +11,8 @@ namespace UrskiyPeriodBusinessLogic.BindingModels
 
         public int? UserId { get; set; }
 
+        public string UserEmail { get; set; }
+
         public DateTime? DateFrom { get; set; }
 
         public DateTime? DateTo { get; set; }

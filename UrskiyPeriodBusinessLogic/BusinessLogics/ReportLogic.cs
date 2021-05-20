@@ -24,23 +24,14 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             _reserveStorage = reserveStorage;
         }
 
-        public List<ReportRouteViewModel> GetRoutes(ReportBindingModel model)
+        public List<RouteViewModel> GetRoutes(ReportBindingModel model)
         {
-            return _routeStorage.GetFilteredList(new RouteBindingModel
+            return _routeStorage.GetFilteredByDateList(new RouteBindingModel
             {
                 UserId = model.UserId,
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
-            })
-            .Select(x => new ReportRouteViewModel
-            {
-                DateVisit = x.DateVisit,
-                Name = x.Name,
-                Count = x.Count,
-                Cost = x.Cost,
-                Reserves = _reserveStorage.GetFilteredList(new ReserveBindingModel { RouteId = x.Id})
-            })
-            .ToList();
+            }).ToList();
         }
         /// <summary>
         /// Сохранение изделия в файл-Word
@@ -52,11 +43,14 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заповедников",
-                Routes = model.RouteId.Select(x => _routeStorage.GetElement(new RouteBindingModel { Id = x })).ToList()
+                Routes = _routeStorage.GetFilteredByPickList(new RouteBindingModel
+                {
+                    PickedRoutes = model.RouteId
+                })
             }) ;
         }
         /// <summary>
-        /// Сохранение компонент с указаеним продуктов в файл-Excel
+        /// Сохранение заповедников с указаеним продуктов в файл-Excel
         /// </summary>
         /// <param name="model"></param>
         public void SaveReservesToExcelFile(ReportBindingModel model)
@@ -65,7 +59,26 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заповедников",
-                Routes = model.RouteId.Select(x => _routeStorage.GetElement(new RouteBindingModel { Id = x })).ToList()
+                Routes = _routeStorage.GetFilteredByPickList(new RouteBindingModel
+                {
+                    PickedRoutes = model.RouteId
+                })
+            });
+        }
+
+        /// <summary>
+        /// Сохранение маршрутов в Pdf
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveRoutesToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список маршрутов",
+                DateFrom = model.DateFrom.Value,
+                DateTo = model.DateTo.Value,
+                Routes = GetRoutes(model)
             });
         }
     }

@@ -28,20 +28,57 @@ namespace UrskiyPeriodDatabaseImplement.Implements
 
         public List<RouteViewModel> GetFilteredList(RouteBindingModel model)
         {
-            if (model == null)
-            {
-                return null;
-            }
             using (var context = new UrskiyPeriodDatabase())
             {
                 return context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
                     .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
-                    // сортируем по дате(для отчёта) и по клиенту
-                    .Where(rec => (model.DateFrom.HasValue && model.DateTo.HasValue && model.DateFrom.Value.Date <= rec.DateVisit.Date
-                     && rec.DateVisit.Date <= model.DateTo.Value.Date && model.UserId.HasValue && model.UserId == rec.UserId)
+                    .Where(rec =>
                      // сортируем по клиенту
-                     || (model.UserId.HasValue && !model.DateFrom.HasValue && model.UserId == rec.UserId))
+                     (model.UserId.HasValue && !model.DateFrom.HasValue && model.PickedRoutes == null && model.UserId == rec.UserId) ||
+                    // маршруты без статей затрат для заполнения бд
+                    (!model.DateFrom.HasValue && model.PickedRoutes == null && !model.UserId.HasValue && model.NoCost.HasValue &&
+                    model.NoCost.Value && rec.CostItemRoute.Count == 0))
                     .ToList().Select(CreateModel).ToList();
+            }
+        }
+
+        public List<RouteViewModel> GetFilteredByPickList(RouteBindingModel model)
+        {
+            using (var context = new UrskiyPeriodDatabase())
+            {
+                return context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .Where(x => model.PickedRoutes.Contains(x.Id)).Select(x => new RouteViewModel
+                    {
+                        Reserves = x.RouteReserve.Select(rec => new ReserveViewModel
+                        {
+                            Name = rec.Reserve.Name,
+                            Price = rec.Reserve.Price
+                        }).ToList(),
+                        Name = x.Name,
+                        Cost = x.Cost
+                    }).ToList();
+            }
+        }
+
+        public List<RouteViewModel> GetFilteredByDateList(RouteBindingModel model)
+        {
+            using (var context = new UrskiyPeriodDatabase())
+            {
+                return context.Routes.Include(x => x.User).Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
+                    .Where(rec => model.DateFrom.Value.Date <= rec.DateVisit.Date &&
+                    rec.DateVisit.Date <= model.DateTo.Value.Date && model.UserId == rec.UserId)
+                    .Select(x => new RouteViewModel
+                    {
+                        CostItems = x.CostItemRoute.Select(rec => new CostItemViewModel
+                        {
+                            Name = rec.CostItem.Name,
+                            Sum = rec.CostItem.Sum
+                        }).ToList(),
+                        Name = x.Name,
+                        Cost = x.Cost,
+                        DateVisit = x.DateVisit,
+                        Count = x.Count
+                    }).ToList();
             }
         }
 
@@ -124,7 +161,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
 
         private RouteViewModel CreateModel(Route route)
         {
-            return new RouteViewModel
+            RouteViewModel res = new RouteViewModel
             {
                 Id = route.Id,
                 Cost = route.Cost,
@@ -132,8 +169,23 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 Name = route.Name,
                 DateVisit = route.DateVisit,
                 RouteReverces = route.RouteReserve.ToDictionary(x => x.ReserveId, x => x.Reserve.Name),
-                CostItemRoute = route.CostItemRoute.ToDictionary(x => x.CostItemId, x => x.CostItem.Sum)
+                CostItemRoute = route.CostItemRoute.ToDictionary(x => x.CostItemId, x => x.CostItem.Sum),
+                CostItems = route.CostItemRoute.Select(x => new CostItemViewModel
+                {
+                    Id = x.CostItemId,
+                    Name = x.CostItem.Name,
+                    Sum = x.CostItem.Sum
+                }).ToList(),
+                UserId = route.UserId,
+                Reserves = route.RouteReserve.Select(rec => new ReserveViewModel
+                {
+                    Id = rec.ReserveId,
+                    Name = rec.Reserve.Name,
+                    Price = rec.Reserve.Price
+                }).ToList(),
+                ReserveId = route.RouteReserve.Select(x => x.ReserveId).ToList()
             };
+            return res;
         }
 
         private Route CreateModel(Route route, RouteBindingModel model)

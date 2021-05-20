@@ -22,9 +22,21 @@ namespace UrskiyPeriodUserApp.Controllers
 
         public IActionResult Index()
         {
-            //(APIUser.GetRequest<ReportBindingModel>($"api/report/GetRoutes?UserId={Program.User.Id}").RouteId
+            if (Program.User == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
             ViewBag.RouteId = new MultiSelectList(APIUser.GetRequest<List<RouteViewModel>>
                 ($"api/main/getroutes?UserId={Program.User.Id}"), "Id", "Name");
+            return View();
+        }
+
+        public IActionResult Email()
+        {
+            if (Program.User == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
             return View();
         }
 
@@ -48,6 +60,28 @@ namespace UrskiyPeriodUserApp.Controllers
             var fileName = "Report.xls";
             var filePath = _environment.WebRootPath + @"\report\" + fileName;
             return PhysicalFile(filePath, "application/xls", fileName);
+        }
+
+        [HttpPost]
+        public IActionResult ReportPdf([Bind("DateTo,DateFrom")] ReportBindingModel model)
+        {
+            model.UserId = Program.User.Id;
+            model.FileName = @"..\UrskiyPeriodUserAPP\wwwroot\report\Report.pdf";
+            APIUser.PostRequest("api/report/MakePdf", model);
+
+            var fileName = "Report.pdf";
+            var filePath = _environment.WebRootPath + @"\report\" + fileName;
+            return PhysicalFile(filePath, "application/pdf", fileName);
+        }
+
+        [HttpPost]
+        public IActionResult SendMail([Bind("DateTo,DateFrom")] ReportBindingModel model)
+        {
+            model.UserId = Program.User.Id;
+            model.UserEmail = Program.User.Email;
+            model.FileName = @"..\UrskiyPeriodUserAPP\wwwroot\report\Report.pdf";
+            APIUser.PostRequest("api/report/SendMail", model);
+            return Redirect("~/Home/Index");
         }
     }
 }

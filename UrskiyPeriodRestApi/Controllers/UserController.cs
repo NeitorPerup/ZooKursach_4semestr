@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using UrskiyPeriodBusinessLogic.BusinessLogics;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodBusinessLogic.ViewModels;
+using System.Text.RegularExpressions;
 
 namespace UrskiyPeriodRestApi.Controllers
 {
@@ -13,6 +14,10 @@ namespace UrskiyPeriodRestApi.Controllers
     public class UserController : Controller
     {
         private readonly UserLogic _logic;
+
+        private readonly int _passwordMaxLength = 50;
+
+        private readonly int _passwordMinLength = 8;
 
         public UserController(UserLogic logic)
         {
@@ -24,10 +29,34 @@ namespace UrskiyPeriodRestApi.Controllers
             { Email = login, Login = login, Password = password })?[0];
 
         [HttpPost]
-        public void Register(UserBindingModel model) => _logic.CreateOrUpdate(model);
+        public void Register(UserBindingModel model) 
+        {
+            CheckData(model);
+            _logic.CreateOrUpdate(model);
+        }
 
         [HttpPost]
-        public void UpdateData(UserBindingModel model) => _logic.CreateOrUpdate(model);
+        public void UpdateData(UserBindingModel model)
+        {
+            CheckData(model);
+            _logic.CreateOrUpdate(model);
+        }
+
+        private void CheckData(UserBindingModel model)
+        {
+            if (!Regex.IsMatch(model.Email, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$"))
+            {
+                throw new Exception("В качестве логина должна быть указана почта");
+            }
+            if (model.Password.Length > _passwordMaxLength || model.Password.Length <
+            _passwordMinLength || !Regex.IsMatch(model.Password,
+            @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
+            {
+                throw new Exception($"Пароль длиной от {_passwordMinLength} до {_passwordMaxLength }" +
+                    $" должен состоять и из цифр, букв и небуквенных символов");
+            }
+        }
     }
 }
 

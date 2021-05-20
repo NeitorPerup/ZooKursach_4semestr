@@ -1,21 +1,21 @@
 ﻿@using UrskiyPeriodBusinessLogic.ViewModels;
 @model RouteViewModel;
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
 }
 
 <div class="text-center">
-    <h2 class="display-4">Создание маршрута</h2>
+    <h2 class="display-4">Изменение маршрута</h2>
 </div>
 <form method="post">
     <div class="row">
         <div class="col-4">Название:</div>
-        <div class="col-8"><input type="text" name="name" id="name" /></div>
+        <div class="col-8"><input type="text" name="name" id="name" value="@Model.Name"/></div>
     </div>
     <div class="row">
         <div class="col-4">Дата посещения:</div>
         <div class="col-4 form-group">
-            <input asp-for="DateVisit" id="datepicker" name="datepicker" value="@DateTime.Now.ToString("dd-MM-yyyy") class="form-control"/>
+            <input asp-for="DateVisit" id="datepicker" name="datepicker" value="@Model.DateVisit.ToShortDateString() class="form-control" />
             <span asp-validation-for="DateVisit" class="text-danger"></span>
         </div>
     </div>
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-8">
-            <input type="submit" value="Создать" class="btn btn-primary" />
+            <input type="submit" value="Изменить" class="btn btn-primary" />
         </div>
     </div>
 </form>
@@ -42,9 +42,8 @@
     <script>
         $(function () {
             $('#datepicker').datetimepicker({
-                dateFormat: "dd-MM-yyyy",
                 changeMonth: true
-            }).datepicker('setDate', '0');
+            });
         });
     </script>
 }

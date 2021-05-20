@@ -29,10 +29,17 @@ namespace UrskiyPeriodRestApi.Controllers
         public List<ReserveViewModel> GetReserveList() => _reserve.Read(null)?.ToList();
 
         [HttpGet]
+        public List<ReserveViewModel> GetFilteredReserveList(int id) => 
+            _reserve.Read(new ReserveBindingModel { RouteId = id})?.ToList();
+
+        [HttpGet]
         public ReserveViewModel GetReserve(int id) => _reserve.Read(new ReserveBindingModel { Id = id})?[0];
 
         [HttpGet]
         public RouteViewModel GetRoute(int id) => _route.Read(new RouteBindingModel { Id = id })?[0];
+
+        [HttpGet]
+        public RouteViewModel GetRouteByName(string name) => _route.Read(new RouteBindingModel { Name = name })?[0];
 
         [HttpPost]
         public void CreateRoute(RouteBindingModel model) => _route.CreateOrUpdate(model);

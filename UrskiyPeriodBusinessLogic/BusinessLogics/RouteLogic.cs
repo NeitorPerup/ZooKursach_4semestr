@@ -25,6 +25,14 @@ namespace UrskiyPeriodBusinessLogic.BusinessLogics
             {
                 return new List<RouteViewModel> { _routeStorage.GetElement(model) };
             }
+            if (model.DateFrom.HasValue && model.DateTo.HasValue && model.UserId.HasValue && model.PickedRoutes == null)
+            {
+                return _routeStorage.GetFilteredByDateList(model);
+            }
+            if (model.PickedRoutes != null && !model.DateFrom.HasValue)
+            {
+                return _routeStorage.GetFilteredByPickList(model);
+            }
             return _routeStorage.GetFilteredList(model);
         }
 

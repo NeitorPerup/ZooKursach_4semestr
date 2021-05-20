@@ -13,10 +13,6 @@ namespace UrskiyPeriodDatabaseImplement.Implements
     {
         public CostItemViewModel GetElement(CostItemBindingModel model)
         {
-            if (model == null)
-            {
-                return null;
-            }
             using (var context = new UrskiyPeriodDatabase())
             {
                 var costItem = context.CostItem.Include(x => x.CostItemRoute).ThenInclude(x => x.Route)
@@ -106,12 +102,27 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             costItem = CreateModel(costItem, model);
 
-            foreach (var costItemRoute in model.CostItemRoute)
+            if (model.Id.HasValue)
+            {
+                var routeCost = context.CostItemRoutes.Where(rec =>
+                rec.CostItemId == model.Id.Value).ToList();
+                // удаляем те, которых нет в модели
+                context.CostItemRoutes.RemoveRange(routeCost.Where(rec =>
+                !model.CostItemRoute.ContainsKey(rec.RouteId)).ToList());
+                context.SaveChanges();
+
+                foreach (var Reserve in routeCost)
+                {
+                    model.CostItemRoute.Remove(Reserve.RouteId);
+                }
+            }
+
+            foreach (var cost in model.CostItemRoute)
             {
                 context.CostItemRoutes.Add(new CostItemRoute
                 {
                     CostItemId = costItem.Id,
-                    RouteId = costItemRoute.Key
+                    RouteId = cost.Key
                 });
             }
             context.SaveChanges();

@@ -18,5 +18,9 @@ namespace UrskiyPeriodBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Цена")]
         public decimal Price { get; set; }
+
+        [DataMember]
+        [DisplayName("Цена")]
+        public decimal PriceToPay { get; set; }
     }
 }

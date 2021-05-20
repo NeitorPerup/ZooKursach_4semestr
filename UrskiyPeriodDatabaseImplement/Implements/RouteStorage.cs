@@ -20,6 +20,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             using (var context = new UrskiyPeriodDatabase())
             {
                 var route = context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .ThenInclude(x => x.Payment)
                     .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem).
                     FirstOrDefault(rec => rec.Id == model.Id || rec.Name == model.Name);
                 return route != null ? CreateModel(route) : null;
@@ -31,6 +32,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             using (var context = new UrskiyPeriodDatabase())
             {
                 return context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .ThenInclude(x => x.Payment)
                     .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
                     .Where(rec =>
                      // сортируем по клиенту
@@ -87,6 +89,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             using (var context = new UrskiyPeriodDatabase())
             {
                 return context.Routes.Include(x => x.User).Include(x => x.RouteReserve).ThenInclude(x => x.Reserve)
+                    .ThenInclude(x => x.Payment)
                     .Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
                     .Select(CreateModel).ToList();
             }
@@ -161,10 +164,11 @@ namespace UrskiyPeriodDatabaseImplement.Implements
 
         private RouteViewModel CreateModel(Route route)
         {
-            RouteViewModel res = new RouteViewModel
+            return new RouteViewModel
             {
                 Id = route.Id,
                 Cost = route.Cost,
+                CostToPay = route.Cost - route.RouteReserve.Sum(x => x.Reserve.Payment.Sum(y => y.Sum)),
                 Count = route.Count,
                 Name = route.Name,
                 DateVisit = route.DateVisit,
@@ -185,7 +189,6 @@ namespace UrskiyPeriodDatabaseImplement.Implements
                 }).ToList(),
                 ReserveId = route.RouteReserve.Select(x => x.ReserveId).ToList()
             };
-            return res;
         }
 
         private Route CreateModel(Route route, RouteBindingModel model)

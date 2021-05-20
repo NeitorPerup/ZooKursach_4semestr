@@ -22,8 +22,12 @@ namespace UrskiyPeriodUserApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index([Bind("ReserveId", "Sum")] PaymentBindingModel model)
+        public IActionResult Index([Bind("ReserveId", "Sum")] PaymentBindingModel model, decimal reserveSum)
         {
+            if (reserveSum < model.Sum)
+            {
+                throw new Exception("Внесённая сумма не должна быть больше, чем сумма к оплате");
+            }
             model.UserId = Program.User.Id;
             APIUser.PostRequest("api/payment/Pay", model);
             return Redirect("~/Home/Index");
@@ -31,7 +35,7 @@ namespace UrskiyPeriodUserApp.Controllers
 
         public decimal CalcSum(int Id)
         {
-            return APIUser.GetRequest<ReserveViewModel>($"api/main/GetReserve?id={Id}").Price;
+            return APIUser.GetRequest<ReserveViewModel>($"api/main/GetReserve?id={Id}").PriceToPay;
         }
     }
 }

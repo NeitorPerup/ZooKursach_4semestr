@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-4">Дата посещения:</div>
         <div class="col-4 form-group">
-            <input asp-for="DateVisit" id="datepicker" name="datepicker" value="@Model.DateVisit.ToShortDateString() class="form-control" />
+            <input asp-for="DateVisit" id="datepicker" name="datepicker" class="form-control" />
             <span asp-validation-for="DateVisit" class="text-danger"></span>
         </div>
     </div>
@@ -38,12 +38,11 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+     
     <script>
         $(function () {
-            $('#datepicker').datetimepicker({
-                changeMonth: true
-            });
+            $("#date").datepicker();
+            $('#date').datepicker("setDate", @Model.DateVisit);
         });
     </script>
 }

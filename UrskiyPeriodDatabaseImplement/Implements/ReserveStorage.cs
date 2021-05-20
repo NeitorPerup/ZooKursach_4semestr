@@ -5,6 +5,7 @@ using UrskiyPeriodBusinessLogic.ViewModels;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodDatabaseImplement.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace UrskiyPeriodDatabaseImplement.Implements
 {
@@ -18,7 +19,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                var route = context.Reserves.FirstOrDefault(rec => rec.Id == model.Id || rec.Name == model.Name);
+                var route = context.Reserves.Include(x => x.Payment)
+                    .FirstOrDefault(rec => rec.Id == model.Id || rec.Name == model.Name);
                 return route != null ? CreateModel(route) : null;
             }
         }
@@ -31,7 +33,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             }
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Reserves.Where(rec => rec.RouteReserve.Select(x => x.RouteId).Contains(model.RouteId)).Select(CreateModel).ToList();
+                return context.Reserves.Include(x => x.Payment)
+                    .Where(rec => rec.RouteReserve.Select(x => x.RouteId).Contains(model.RouteId)).Select(CreateModel).ToList();
             }
         }
 
@@ -39,7 +42,7 @@ namespace UrskiyPeriodDatabaseImplement.Implements
         {
             using (var context = new UrskiyPeriodDatabase())
             {
-                return context.Reserves.Select(CreateModel).ToList();
+                return context.Reserves.Include(x => x.Payment).Select(CreateModel).ToList();
             }
         }
 
@@ -88,7 +91,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             {
                 Id = reserve.Id,
                 Name = reserve.Name,
-                Price = reserve.Price
+                Price = reserve.Price,
+                PriceToPay = reserve.Price - reserve.Payment.Sum(x => x.Sum)
             };
         }
 

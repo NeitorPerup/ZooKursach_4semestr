@@ -27,6 +27,10 @@ namespace UrskiyPeriodBusinessLogic.ViewModels
         public decimal Cost { get; set; }
 
         [DataMember]
+        [DisplayName("К оплате")]
+        public decimal CostToPay { get; set; }
+
+        [DataMember]
         [DisplayName("Дата посещения")]
         public DateTime DateVisit { get; set; }
 

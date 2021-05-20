@@ -172,27 +172,24 @@ namespace UrskiyPeriodUserApp.Controllers
         [HttpPost]
         public void Update(DateTime datepicker, [Bind("ReserveId", "Name", "Id")] RouteViewModel model)
         {
-            if (string.IsNullOrEmpty(model.Name) || datepicker == null)
+            if (string.IsNullOrEmpty(model.Name) || datepicker == null || model.ReserveId == null || model.ReserveId.Count == 0)
             {
                 return;
-            }
-            if (model.ReserveId == null || model.ReserveId.Count == 0)
-            {
-                var elem = APIUser.GetRequest<RouteViewModel>($"api/main/GetRoute?id={model.Id}");
-                model.ReserveId = elem.ReserveId;
             }
             List<ReserveViewModel> reserves = model.ReserveId.
                 Select(x => APIUser.GetRequest<ReserveViewModel>($"api/main/GetReserve?id={x}")).ToList();
             
             APIUser.PostRequest("api/main/CreateRoute", new RouteBindingModel
             {
+                Id = model.Id,
+                UserId = Program.User.Id,
                 Cost = reserves.Sum(x => x.Price),
                 Count = reserves.Count,
                 Name = model.Name,
                 DateVisit = datepicker,
                 RouteReverces = reserves.ToDictionary(x => x.Id, x => x.Name)
             });
-            Response.Redirect("~/Home/Index");
+            Response.Redirect("../Index");
         }
     }
 }

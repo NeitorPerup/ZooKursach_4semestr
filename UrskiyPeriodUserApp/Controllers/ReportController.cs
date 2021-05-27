@@ -63,15 +63,13 @@ namespace UrskiyPeriodUserApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ReportPdf([Bind("DateTo,DateFrom")] ReportBindingModel model)
+        public IActionResult ReportOnView([Bind("DateTo,DateFrom")] ReportBindingModel model)
         {
             model.UserId = Program.User.Id;
             model.FileName = @"..\UrskiyPeriodUserAPP\wwwroot\report\Report.pdf";
             APIUser.PostRequest("api/report/MakePdf", model);
-
-            var fileName = "Report.pdf";
-            var filePath = _environment.WebRootPath + @"\report\" + fileName;
-            return PhysicalFile(filePath, "application/pdf", fileName);
+            ViewBag.Report = model.FileName;
+            return View("Email");
         }
 
         [HttpPost]

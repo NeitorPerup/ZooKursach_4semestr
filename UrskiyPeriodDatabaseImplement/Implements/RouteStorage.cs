@@ -67,7 +67,8 @@ namespace UrskiyPeriodDatabaseImplement.Implements
             using (var context = new UrskiyPeriodDatabase())
             {
                 return context.Routes.Include(x => x.User).Include(x => x.CostItemRoute).ThenInclude(x => x.CostItem)
-                    .Where(rec => model.DateFrom.Value.Date <= rec.DateVisit.Date &&
+                    .Where(rec => model.DateFrom.HasValue && model.DateFrom.HasValue && 
+                    model.DateFrom.Value.Date <= rec.DateVisit.Date &&
                     rec.DateVisit.Date <= model.DateTo.Value.Date && model.UserId == rec.UserId)
                     .Select(x => new RouteViewModel
                     {

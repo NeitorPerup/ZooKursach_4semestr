@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodBusinessLogic.ViewModels;
-using UrskiyPeriodUserApp.Models;
 
 namespace UrskiyPeriodUserApp.Controllers
 {

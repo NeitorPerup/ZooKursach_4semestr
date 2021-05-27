@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UrskiyPeriodBusinessLogic.BindingModels;
 using UrskiyPeriodBusinessLogic.ViewModels;
-using UrskiyPeriodUserApp.Models;
 
 namespace UrskiyPeriodUserApp.Controllers
 {

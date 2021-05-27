@@ -5,13 +5,11 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrskiyPeriodBusinessLogic", "UrskiyPeriodBusinessLogic\UrskiyPeriodBusinessLogic.csproj", "{9C665C44-3793-42A3-9C73-C34589EB0C85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodView", "UrskiyPeriodView\UrskiyPeriodView.csproj", "{826B48F9-DF62-4546-AC07-83A3104E9A96}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrskiyPeriodDatabaseImplement", "UrskiyPeriodDatabaseImplement\UrskiyPeriodDatabaseImplement.csproj", "{24C8D679-A285-4882-8293-6E2429E3D1AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodRestApi", "UrskiyPeriodRestApi\UrskiyPeriodRestApi.csproj", "{0708F07B-D2EB-4371-9859-C8676C214BAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrskiyPeriodRestApi", "UrskiyPeriodRestApi\UrskiyPeriodRestApi.csproj", "{0708F07B-D2EB-4371-9859-C8676C214BAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrskiyPeriodUserApp", "UrskiyPeriodUserApp\UrskiyPeriodUserApp.csproj", "{D2F9DFA9-DF77-4DEF-8139-44838152471F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrskiyPeriodUserApp", "UrskiyPeriodUserApp\UrskiyPeriodUserApp.csproj", "{D2F9DFA9-DF77-4DEF-8139-44838152471F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C665C44-3793-42A3-9C73-C34589EB0C85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{826B48F9-DF62-4546-AC07-83A3104E9A96}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C8D679-A285-4882-8293-6E2429E3D1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU

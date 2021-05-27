@@ -117,49 +117,7 @@ namespace UrskiyPeriodRestApi
                     {
                         _costItemLogic.CreateOrUpdate(cost);
                     }
-                }
-
-
-
-
-                //Random rnd = new Random(1000);
-                //int costCount = 0;
-                //while (routes.Count() > 0)
-                //{
-                //    int count = routes.Count();
-                //    costCount += rnd.Next(0, (list.Count - 1) / 2);
-                //    for (int i = 0; i < costCount; ++i)
-                //    {
-                //        var cost = list[i];
-                //        var elem = _costItemLogic.GetElement(cost);
-                //        if (elem != null)
-                //        {
-                //            cost.Id = elem.Id;
-                //            cost.CostItemRoute = elem.CostItemRoute;
-                //            // Добавляем статью затрат к нескольким маршрутам без статей затрат
-                //            int n = rnd.Next(count == 1 ? 0 : 1, count - 1);
-                //            for (int j = 0; j <= n; j++)
-                //            {
-                //                var rt = routes[rnd.Next(0, count - 1)];
-                //                elem.CostItemRoute.Add(rt.Id, rt.Name);
-                //            }
-                //        }
-                //        else
-                //        {
-                //            cost.CostItemRoute = routes.Skip(rnd.Next(0, count / 3)).Take(rnd.Next(1, count / 2))
-                //                .ToDictionary(x => x.Id, x => x.Name);
-                //        }
-                //        for (int k = 0; k < routes.Count; ++k)
-                //        {
-                //            if (routes[k].CostItemRoute.Count > 0)
-                //            {
-                //                routes.RemoveAt(k);
-                //                k--;
-                //            }
-                //        }
-                //        _costItemLogic.CreateOrUpdate(cost);
-                //    }
-                
+                }              
             }
             catch
             {
